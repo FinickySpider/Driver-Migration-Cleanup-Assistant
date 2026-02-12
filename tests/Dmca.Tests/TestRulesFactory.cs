@@ -1,0 +1,115 @@
+using Dmca.Core.Scoring;
+
+namespace Dmca.Tests;
+
+/// <summary>
+/// Provides a standard RulesConfig for testing, based on the production rules.yml.
+/// </summary>
+internal static class TestRulesFactory
+{
+    private const string RulesYaml = """
+        version: 1
+        limits:
+          score_min: 0
+          score_max: 100
+          ai_delta_min: -25
+          ai_delta_max: 25
+          ai_delta_max_with_user_fact: 40
+        recommendation_bands:
+          - min: 80
+            max: 100
+            recommendation: REMOVE_STAGE_1
+          - min: 55
+            max: 79
+            recommendation: REMOVE_STAGE_2
+          - min: 30
+            max: 54
+            recommendation: REVIEW
+          - min: 0
+            max: 29
+            recommendation: KEEP
+        hard_blocks:
+          - code: MICROSOFT_INBOX
+            when:
+              any:
+                - path: item.signature.isMicrosoft
+                  op: eq
+                  value: true
+                - path: item.signature.signer
+                  op: contains_i
+                  value: "Microsoft Windows"
+            message: "Microsoft inbox / core component"
+          - code: BOOT_CRITICAL
+            when:
+              any:
+                - path: item.tags.bootCriticalInUse
+                  op: eq
+                  value: true
+            message: "Boot-critical driver currently in use"
+          - code: PRESENT_HARDWARE_BINDING
+            when:
+              any:
+                - path: item.present
+                  op: eq
+                  value: true
+            applies_to_types: [DRIVER, SERVICE]
+            message: "Bound to present hardware"
+        keyword_sets:
+          intel_platform: ["intel","rst","mei","management engine","rapid storage","iaStor"]
+          asus_oem: ["asus","aura","armoury","atkex"]
+          amd_platform: ["amd","ryzen","am4","am5"]
+        signals:
+          - id: non_present_device
+            weight: 25
+            when:
+              all:
+                - path: item.present
+                  op: eq
+                  value: false
+            rationale: "Device is not present (hidden/non-present)"
+          - id: vendor_matches_old_platform_keywords
+            weight: 20
+            when:
+              any:
+                - path: item.vendor
+                  op: matches_keywords
+                  keywords: intel_platform
+                - path: item.displayName
+                  op: matches_keywords
+                  keywords: intel_platform
+            requires_user_fact:
+              any:
+                - key: old_platform_vendor
+                  equals_i: "intel"
+            rationale: "Matches old platform keywords"
+          - id: service_disabled
+            weight: 10
+            applies_to_types: [SERVICE]
+            when:
+              all:
+                - path: item.startType
+                  op: eq
+                  value: 4
+            rationale: "Service disabled"
+          - id: currently_running_penalty
+            weight: -25
+            when:
+              all:
+                - path: item.running
+                  op: eq
+                  value: true
+            rationale: "Currently running/loaded"
+          - id: unknown_vendor_penalty
+            weight: -10
+            when:
+              all:
+                - path: item.vendor
+                  op: missing_or_empty
+            rationale: "Unknown vendor"
+        post_rules:
+          clamp_score: true
+          compute_final_score: true
+        """;
+
+    public static RulesConfig CreateConfig() => RulesLoader.Load(RulesYaml);
+}

@@ -1,12 +1,13 @@
 ---
 id: FEAT-018
 type: feature
-status: planned
+status: complete
 priority: high
 phase: PHASE-02
 sprint: SPRINT-04
 owner: ""
 depends_on: [FEAT-015]
+completed: 2026-02-12
 ---
 
 # FEAT-018: Proposal CRUD and Lifecycle
@@ -17,14 +18,14 @@ Implement the full proposal system: create, list, get, and status transitions (P
 
 ## Acceptance Criteria
 
-- [ ] `Proposal` model matches `proposal.json` schema
-- [ ] `ProposalChange` supports all 7 change types
-- [ ] Proposals created as PENDING
-- [ ] Proposals can be approved or rejected (UI-only endpoints)
-- [ ] Proposal list and get endpoints return correct data
-- [ ] Evidence array stored and returned with proposals
-- [ ] Risk summary (LOW/MEDIUM/HIGH) computed per proposal
-- [ ] Proposals persisted to SQLite
+- [x] `Proposal` model matches `proposal.json` schema
+- [x] `ProposalChange` supports all 7 change types
+- [x] Proposals created as PENDING
+- [x] Proposals can be approved or rejected (UI-only endpoints)
+- [x] Proposal list and get endpoints return correct data
+- [x] Evidence array stored and returned with proposals
+- [x] Risk summary (LOW/MEDIUM/HIGH) computed per proposal
+- [x] Proposals persisted to SQLite
 
 ## Files Touched
 
@@ -37,11 +38,15 @@ Implement the full proposal system: create, list, get, and status transitions (P
 
 ## Testing
 
-- [ ] Create, list, get proposals work correctly
-- [ ] Status transitions enforce lifecycle
-- [ ] All 7 change types accepted
+- [x] Create, list, get proposals work correctly
+- [x] Status transitions enforce lifecycle
+- [x] All 7 change types accepted
 
 ## Done When
 
-- [ ] Acceptance criteria met
-- [ ] Verified with eval fixtures
+- [x] Acceptance criteria met
+- [x] Verified with eval fixtures
+
+## Completion Notes
+
+Implemented `ProposalService` with full CRUD operations and `ProposalRepository` for SQLite persistence. Full lifecycle enforced: proposals created as PENDING, transitioned to APPROVED or REJECTED via UI-only endpoints. All 7 change types supported (score_delta, recommendation, pin_protect, action_add, action_remove, note_add, fact_request). Evidence array and risk summary (LOW/MEDIUM/HIGH) stored and returned. All tests passing.

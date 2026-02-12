@@ -36,6 +36,9 @@ public sealed class DmcaDbContextTests : IDisposable
         Assert.Contains("user_facts", tables);
         Assert.Contains("snapshots", tables);
         Assert.Contains("inventory_items", tables);
+        Assert.Contains("plans", tables);
+        Assert.Contains("plan_items", tables);
+        Assert.Contains("proposals", tables);
     }
 
     [Fact]

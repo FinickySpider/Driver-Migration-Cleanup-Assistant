@@ -1,12 +1,13 @@
 ---
 id: FEAT-016
 type: feature
-status: planned
+status: complete
 priority: high
 phase: PHASE-02
 sprint: SPRINT-04
 owner: ""
 depends_on: [FEAT-015]
+completed: 2026-02-12
 ---
 
 # FEAT-016: OpenAI Client and Tool-Calling Integration
@@ -17,13 +18,13 @@ Implement the OpenAI client that sends chat completions with tool definitions ma
 
 ## Acceptance Criteria
 
-- [ ] OpenAI client sends chat completion requests with 7 tool definitions
-- [ ] Tool-calling loop handles multiple rounds of tool calls
-- [ ] Tool call results are dispatched to the correct local API handler
-- [ ] API key is loaded from secure configuration (environment variable or user secrets)
-- [ ] API key is never logged
-- [ ] Client handles rate limiting and transient errors with retry
-- [ ] Conversation history is maintained for multi-turn sessions
+- [x] OpenAI client sends chat completion requests with 7 tool definitions
+- [x] Tool-calling loop handles multiple rounds of tool calls
+- [x] Tool call results are dispatched to the correct local API handler
+- [x] API key is loaded from secure configuration (environment variable or user secrets)
+- [x] API key is never logged
+- [x] Client handles rate limiting and transient errors with retry
+- [x] Conversation history is maintained for multi-turn sessions
 
 ## Files Touched
 
@@ -35,11 +36,15 @@ Implement the OpenAI client that sends chat completions with tool definitions ma
 
 ## Testing
 
-- [ ] Mock OpenAI responses processed correctly
-- [ ] Tool dispatch routes to correct handlers
-- [ ] API key not present in logs
+- [x] Mock OpenAI responses processed correctly
+- [x] Tool dispatch routes to correct handlers
+- [x] API key not present in logs
 
 ## Done When
 
-- [ ] Acceptance criteria met
-- [ ] Verified with mock and live OpenAI
+- [x] Acceptance criteria met
+- [x] Verified with mock and live OpenAI
+
+## Completion Notes
+
+Implemented `IAiModelClient` interface with `OpenAiModelClient` concrete implementation. `AiAdvisorService` orchestrates multi-turn tool-calling loop: sends messages, receives tool calls, dispatches to local service methods, returns results, and repeats until final response. API key loaded from configuration and never logged. All tests passing.

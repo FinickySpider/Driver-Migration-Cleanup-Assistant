@@ -9,11 +9,11 @@ Driver Migration Cleanup Assistant (DMCA)
 
 ## Active Phase
 
-- [PHASE-02: Scoring Engine & AI Advisor](../phases/PHASE-02-scoring-engine-and-ai-advisor.md) — active
+- [PHASE-03: Execution & UI](../phases/PHASE-03-execution-and-ui.md) — active
 
 ## Active Sprint
 
-- [SPRINT-03](../sprints/SPRINT-03.md) — active
+- [SPRINT-05](../sprints/SPRINT-05.md) — planned
 
 ## In Progress
 
@@ -22,16 +22,16 @@ Driver Migration Cleanup Assistant (DMCA)
 ## Phases
 
 - [PHASE-01: Foundation & Inventory](../phases/PHASE-01-foundation-and-inventory.md) — complete (2025-07-15)
-- [PHASE-02: Scoring Engine & AI Advisor](../phases/PHASE-02-scoring-engine-and-ai-advisor.md) — active
-- [PHASE-03: Execution & UI](../phases/PHASE-03-execution-and-ui.md) — planned
+- [PHASE-02: Scoring Engine & AI Advisor](../phases/PHASE-02-scoring-engine-and-ai-advisor.md) — complete (2026-02-12)
+- [PHASE-03: Execution & UI](../phases/PHASE-03-execution-and-ui.md) — active
 - [PHASE-04: Verification & Hardening](../phases/PHASE-04-verification-and-hardening.md) — planned
 
 ## Sprints
 
 - [SPRINT-01](../sprints/SPRINT-01.md) — complete (PHASE-01)
 - [SPRINT-02](../sprints/SPRINT-02.md) — complete (PHASE-01)
-- [SPRINT-03](../sprints/SPRINT-03.md) — active (PHASE-02)
-- [SPRINT-04](../sprints/SPRINT-04.md) — planned (PHASE-02)
+- [SPRINT-03](../sprints/SPRINT-03.md) — complete (PHASE-02)
+- [SPRINT-04](../sprints/SPRINT-04.md) — complete (PHASE-02)
 - [SPRINT-05](../sprints/SPRINT-05.md) — planned (PHASE-03)
 - [SPRINT-06](../sprints/SPRINT-06.md) — planned (PHASE-03)
 - [SPRINT-07](../sprints/SPRINT-07.md) — planned (PHASE-04)
@@ -54,17 +54,17 @@ Driver Migration Cleanup Assistant (DMCA)
 - [FEAT-010: Inventory snapshot assembly](../features/FEAT-010-inventory-snapshot-assembly.md) — complete
 
 ### SPRINT-03 (PHASE-02)
-- [FEAT-011: Rules engine](../features/FEAT-011-rules-engine.md) — planned
-- [FEAT-012: Signal evaluation](../features/FEAT-012-signal-evaluation.md) — planned
-- [FEAT-013: Hard-block enforcement](../features/FEAT-013-hard-block-enforcement.md) — planned
-- [FEAT-014: Decision plan generation](../features/FEAT-014-decision-plan-generation.md) — planned
+- [FEAT-011: Rules engine](../features/FEAT-011-rules-engine.md) — complete
+- [FEAT-012: Signal evaluation](../features/FEAT-012-signal-evaluation.md) — complete
+- [FEAT-013: Hard-block enforcement](../features/FEAT-013-hard-block-enforcement.md) — complete
+- [FEAT-014: Decision plan generation](../features/FEAT-014-decision-plan-generation.md) — complete
 
 ### SPRINT-04 (PHASE-02)
-- [FEAT-015: Local REST API](../features/FEAT-015-local-rest-api.md) — planned
-- [FEAT-016: OpenAI integration](../features/FEAT-016-openai-integration.md) — planned
-- [FEAT-017: AI safety guardrails](../features/FEAT-017-ai-safety-guardrails.md) — planned
-- [FEAT-018: Proposal system](../features/FEAT-018-proposal-system.md) — planned
-- [FEAT-019: Proposal merge](../features/FEAT-019-proposal-merge.md) — planned
+- [FEAT-015: Local REST API](../features/FEAT-015-local-rest-api.md) — complete
+- [FEAT-016: OpenAI integration](../features/FEAT-016-openai-integration.md) — complete
+- [FEAT-017: AI safety guardrails](../features/FEAT-017-ai-safety-guardrails.md) — complete
+- [FEAT-018: Proposal system](../features/FEAT-018-proposal-system.md) — complete
+- [FEAT-019: Proposal merge](../features/FEAT-019-proposal-merge.md) — complete
 
 ### SPRINT-05 (PHASE-03)
 - [FEAT-020: Action queue builder](../features/FEAT-020-action-queue-builder.md) — planned

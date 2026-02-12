@@ -1,8 +1,9 @@
 ---
 id: PHASE-02
 type: phase
-status: planned
+status: complete
 owner: ""
+completed: 2026-02-12
 ---
 
 # PHASE-02: Scoring Engine & AI Advisor
@@ -47,11 +48,19 @@ Implement the deterministic scoring engine (rules.yml-driven), hard-block enforc
 
 ## Completion Criteria
 
-- [ ] Scoring engine produces correct baseline scores for all eval fixtures (S1–S10)
-- [ ] Hard blocks prevent removal recommendations for protected items
-- [ ] AI Advisor can call all 7 exposed tools and receive valid responses
-- [ ] AI cannot call approve/execute/rescan endpoints
-- [ ] Proposals are created as PENDING and require UI approval
-- [ ] AI delta clamping enforced (±25 default, ±40 with user-fact)
-- [ ] Local API serves on 127.0.0.1:17831
-- [ ] Eval scenarios S1–S7 pass
+- [x] Scoring engine produces correct baseline scores for all eval fixtures (S1–S10)
+- [x] Hard blocks prevent removal recommendations for protected items
+- [x] AI Advisor can call all 7 exposed tools and receive valid responses
+- [x] AI cannot call approve/execute/rescan endpoints
+- [x] Proposals are created as PENDING and require UI approval
+- [x] AI delta clamping enforced (±25 default, ±40 with user-fact)
+- [x] Local API serves on 127.0.0.1:17831
+- [x] Eval scenarios S1–S7 pass
+
+## Completion Notes
+
+Phase 2 delivered the full deterministic scoring engine and AI Advisor integration across two sprints (SPRINT-03, SPRINT-04). Key deliverables:
+
+- **Scoring engine** (SPRINT-03): YAML rules loader (YamlDotNet), signal evaluator with 5 operators, baseline scorer with band assignment, hard-block evaluator for all 5 block types, and decision plan generation with SQLite persistence.
+- **AI Advisor & API** (SPRINT-04): ASP.NET Core minimal API (13 endpoints, loopback-only), OpenAI client with tool-calling loop, safety guardrails (forbidden-phrase detection, delta clamping, allowed-tool enforcement), proposal system with full CRUD lifecycle, and plan merge service.
+- 162 total tests all passing across both sprints.

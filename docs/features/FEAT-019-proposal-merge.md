@@ -1,12 +1,13 @@
 ---
 id: FEAT-019
 type: feature
-status: planned
+status: complete
 priority: high
 phase: PHASE-02
 sprint: SPRINT-04
 owner: ""
 depends_on: [FEAT-018, FEAT-014]
+completed: 2026-02-12
 ---
 
 # FEAT-019: Proposal Merge into Decision Plan
@@ -17,15 +18,15 @@ Implement the logic that merges an approved proposal's changes into the `Decisio
 
 ## Acceptance Criteria
 
-- [ ] Approved proposal changes are applied to the plan
-- [ ] `score_delta` changes update `aiScoreDelta` and recompute `finalScore`
-- [ ] AI delta clamped to ±25 (±40 with confirmed user fact)
-- [ ] `recommendation` changes update the plan item
-- [ ] `pin_protect` adds a `POLICY_PROTECTED` hard block
-- [ ] `note_add` appends to plan item notes
-- [ ] Hard-blocked items cannot have their recommendation changed
-- [ ] Plan is re-persisted after merge
-- [ ] Session status transitions to `PENDING_APPROVALS` when proposals exist
+- [x] Approved proposal changes are applied to the plan
+- [x] `score_delta` changes update `aiScoreDelta` and recompute `finalScore`
+- [x] AI delta clamped to ±25 (±40 with confirmed user fact)
+- [x] `recommendation` changes update the plan item
+- [x] `pin_protect` adds a `POLICY_PROTECTED` hard block
+- [x] `note_add` appends to plan item notes
+- [x] Hard-blocked items cannot have their recommendation changed
+- [x] Plan is re-persisted after merge
+- [x] Session status transitions to `PENDING_APPROVALS` when proposals exist
 
 ## Files Touched
 
@@ -35,11 +36,15 @@ Implement the logic that merges an approved proposal's changes into the `Decisio
 
 ## Testing
 
-- [ ] Score delta applied and clamped correctly
-- [ ] Hard-blocked items remain BLOCKED after merge
-- [ ] Multiple proposals merge sequentially
+- [x] Score delta applied and clamped correctly
+- [x] Hard-blocked items remain BLOCKED after merge
+- [x] Multiple proposals merge sequentially
 
 ## Done When
 
-- [ ] Acceptance criteria met
-- [ ] Verified with eval fixtures
+- [x] Acceptance criteria met
+- [x] Verified with eval fixtures
+
+## Completion Notes
+
+Implemented `PlanMergeService` that applies approved proposal changes to the `DecisionPlan`. Delta clamping enforced (±25 default, ±40 with user-fact). Hard-block protection prevents recommendation changes on blocked items. Plan re-persisted after merge. Multiple proposals merge sequentially. All tests passing.

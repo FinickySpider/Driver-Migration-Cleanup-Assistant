@@ -1,10 +1,11 @@
 ---
 id: SPRINT-03
 type: sprint
-status: planned
+status: complete
 phase: PHASE-02
 timebox: "2 weeks"
 owner: ""
+completed: 2026-02-12
 ---
 
 # SPRINT-03
@@ -17,10 +18,10 @@ Deterministic scoring engine is functional: rules are loaded from `rules.yml`, s
 
 ### Features
 
-- [FEAT-011: Rules engine and rules.yml loader](../features/FEAT-011-rules-engine.md)
-- [FEAT-012: Signal evaluation and baseline scoring](../features/FEAT-012-signal-evaluation.md)
-- [FEAT-013: Hard-block enforcement](../features/FEAT-013-hard-block-enforcement.md)
-- [FEAT-014: Decision plan generation and persistence](../features/FEAT-014-decision-plan-generation.md)
+- [FEAT-011: Rules engine and rules.yml loader](../features/FEAT-011-rules-engine.md) — complete
+- [FEAT-012: Signal evaluation and baseline scoring](../features/FEAT-012-signal-evaluation.md) — complete
+- [FEAT-013: Hard-block enforcement](../features/FEAT-013-hard-block-enforcement.md) — complete
+- [FEAT-014: Decision plan generation and persistence](../features/FEAT-014-decision-plan-generation.md) — complete
 
 ### Bugs
 
@@ -33,3 +34,11 @@ Deterministic scoring engine is functional: rules are loaded from `rules.yml`, s
 ## Deferred / Carryover
 
 - (none)
+
+## Completion Notes
+
+- **Rules engine**: YAML loader implemented using YamlDotNet; strongly-typed `RulesConfig` with limits, bands, hard-block definitions, keyword sets, and signal definitions; validated on load.
+- **Signal evaluation**: `SignalEvaluator` supports 5 operators (`eq`, `contains_i`, `matches_keywords`, `missing_or_empty`, plus `all`/`any` condition groups); `BaselineScorer` computes clamped 0–100 scores with recommendation band assignment.
+- **Hard-block enforcement**: `HardBlockEvaluator` evaluates all 5 hard-block types (`MICROSOFT_INBOX`, `BOOT_CRITICAL`, `PRESENT_HARDWARE_BINDING`, `POLICY_PROTECTED`, `DEPENDENCY_REQUIRED`); blocked items override recommendation to `BLOCKED`.
+- **Decision plan generation**: `PlanService` assembles `DecisionPlan` with `PlanItem`s; `PlanRepository` persists to SQLite; session transitions to `PLANNED`.
+- All tests passing.

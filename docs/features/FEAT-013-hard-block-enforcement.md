@@ -1,12 +1,13 @@
 ---
 id: FEAT-013
 type: feature
-status: planned
+status: complete
 priority: high
 phase: PHASE-02
 sprint: SPRINT-03
 owner: ""
 depends_on: [FEAT-011]
+completed: 2026-02-12
 ---
 
 # FEAT-013: Hard-Block Enforcement
@@ -17,15 +18,15 @@ Implement hard-block evaluation that prevents removal of protected items. Hard b
 
 ## Acceptance Criteria
 
-- [ ] Hard-block conditions from `rules.yml` are evaluated per item
-- [ ] `MICROSOFT_INBOX`: items with `isMicrosoft = true` or signer contains "Microsoft Windows"
-- [ ] `BOOT_CRITICAL`: items with `bootCriticalInUse = true`
-- [ ] `PRESENT_HARDWARE_BINDING`: present drivers/services are blocked by default
-- [ ] `POLICY_PROTECTED`: user-pinned items blocked
-- [ ] `DEPENDENCY_REQUIRED`: items required by non-removable items blocked
-- [ ] Any hard block sets recommendation to `BLOCKED` regardless of score
-- [ ] Hard blocks are returned by `get_hardblocks` API
-- [ ] Eval fixtures S2 (Microsoft inbox) and S3 (boot-critical) pass
+- [x] Hard-block conditions from `rules.yml` are evaluated per item
+- [x] `MICROSOFT_INBOX`: items with `isMicrosoft = true` or signer contains "Microsoft Windows"
+- [x] `BOOT_CRITICAL`: items with `bootCriticalInUse = true`
+- [x] `PRESENT_HARDWARE_BINDING`: present drivers/services are blocked by default
+- [x] `POLICY_PROTECTED`: user-pinned items blocked
+- [x] `DEPENDENCY_REQUIRED`: items required by non-removable items blocked
+- [x] Any hard block sets recommendation to `BLOCKED` regardless of score
+- [x] Hard blocks are returned by `get_hardblocks` API
+- [x] Eval fixtures S2 (Microsoft inbox) and S3 (boot-critical) pass
 
 ## Files Touched
 
@@ -36,12 +37,16 @@ Implement hard-block evaluation that prevents removal of protected items. Hard b
 
 ## Testing
 
-- [ ] Microsoft-signed item is blocked
-- [ ] Boot-critical item is blocked
-- [ ] Present hardware is blocked
-- [ ] Non-blocked item is not falsely blocked
+- [x] Microsoft-signed item is blocked
+- [x] Boot-critical item is blocked
+- [x] Present hardware is blocked
+- [x] Non-blocked item is not falsely blocked
 
 ## Done When
 
-- [ ] Acceptance criteria met
-- [ ] Verified with eval fixtures
+- [x] Acceptance criteria met
+- [x] Verified with eval fixtures
+
+## Completion Notes
+
+Implemented `HardBlockEvaluator` covering all 5 hard-block types (`MICROSOFT_INBOX`, `BOOT_CRITICAL`, `PRESENT_HARDWARE_BINDING`, `POLICY_PROTECTED`, `DEPENDENCY_REQUIRED`). Hard blocks override recommendation to `BLOCKED` regardless of score. Eval fixtures S2 and S3 pass. All tests passing.

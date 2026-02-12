@@ -1,7 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <!-- Core has no external dependencies by design -->
+    <!-- Core has no external dependencies by design, except YamlDotNet for rules config -->
   </PropertyGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="Dmca.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="YamlDotNet" Version="16.3.0" />
+  </ItemGroup>
 
 </Project>

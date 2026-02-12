@@ -1,12 +1,13 @@
 ---
 id: FEAT-014
 type: feature
-status: planned
+status: complete
 priority: high
 phase: PHASE-02
 sprint: SPRINT-03
 owner: ""
 depends_on: [FEAT-012, FEAT-013]
+completed: 2026-02-12
 ---
 
 # FEAT-014: Decision Plan Generation and Persistence
@@ -17,14 +18,14 @@ Implement the `DecisionPlan` generator that combines baseline scores and hard bl
 
 ## Acceptance Criteria
 
-- [ ] `DecisionPlan` model matches `plan.json` schema
-- [ ] `PlanItem` includes: itemId, baselineScore, aiScoreDelta (initially 0), finalScore, recommendation, hardBlocks, engineRationale
-- [ ] Final score = clamp(baselineScore + aiScoreDelta, 0, 100)
-- [ ] Recommendation assigned from band or BLOCKED if any hard block
-- [ ] Engine rationale includes human-readable reasons for score components
-- [ ] Plan is persisted to SQLite
-- [ ] Session status transitions to `PLANNED`
-- [ ] `GET /v1/plan/current` returns the plan (stubbed endpoint)
+- [x] `DecisionPlan` model matches `plan.json` schema
+- [x] `PlanItem` includes: itemId, baselineScore, aiScoreDelta (initially 0), finalScore, recommendation, hardBlocks, engineRationale
+- [x] Final score = clamp(baselineScore + aiScoreDelta, 0, 100)
+- [x] Recommendation assigned from band or BLOCKED if any hard block
+- [x] Engine rationale includes human-readable reasons for score components
+- [x] Plan is persisted to SQLite
+- [x] Session status transitions to `PLANNED`
+- [x] `GET /v1/plan/current` returns the plan (stubbed endpoint)
 
 ## Files Touched
 
@@ -37,11 +38,15 @@ Implement the `DecisionPlan` generator that combines baseline scores and hard bl
 
 ## Testing
 
-- [ ] Generated plan matches expected scores for eval fixtures
-- [ ] Hard-blocked items have recommendation = BLOCKED
-- [ ] Plan round-trips through SQLite
+- [x] Generated plan matches expected scores for eval fixtures
+- [x] Hard-blocked items have recommendation = BLOCKED
+- [x] Plan round-trips through SQLite
 
 ## Done When
 
-- [ ] Acceptance criteria met
-- [ ] Verified with eval fixtures
+- [x] Acceptance criteria met
+- [x] Verified with eval fixtures
+
+## Completion Notes
+
+Implemented `PlanService` to assemble `DecisionPlan` with scored `PlanItem`s combining baseline scores, hard blocks, and recommendation bands. `PlanRepository` persists plans to SQLite with full round-trip fidelity. Session transitions to `PLANNED` after plan generation. All tests passing.

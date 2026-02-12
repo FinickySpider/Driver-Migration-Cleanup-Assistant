@@ -111,6 +111,48 @@ public sealed class DmcaDbContext
 
         CREATE INDEX IF NOT EXISTS idx_inventory_items_snapshot
             ON inventory_items(snapshot_id);
+
+        CREATE TABLE IF NOT EXISTS plans (
+            id              TEXT    PRIMARY KEY,
+            session_id      TEXT    NOT NULL,
+            created_at      TEXT    NOT NULL,
+            FOREIGN KEY (session_id) REFERENCES sessions(id)
+        );
+
+        CREATE INDEX IF NOT EXISTS idx_plans_session
+            ON plans(session_id);
+
+        CREATE TABLE IF NOT EXISTS plan_items (
+            plan_id             TEXT    NOT NULL,
+            item_id             TEXT    NOT NULL,
+            baseline_score      INTEGER NOT NULL,
+            ai_score_delta      INTEGER NOT NULL DEFAULT 0,
+            final_score         INTEGER NOT NULL,
+            recommendation      TEXT    NOT NULL,
+            hard_blocks_json    TEXT    NOT NULL DEFAULT '[]',
+            engine_rationale_json TEXT  NOT NULL DEFAULT '[]',
+            ai_rationale_json   TEXT    NOT NULL DEFAULT '[]',
+            notes_json          TEXT    NOT NULL DEFAULT '[]',
+            blocked_reason      TEXT,
+            PRIMARY KEY (plan_id, item_id),
+            FOREIGN KEY (plan_id) REFERENCES plans(id)
+        );
+
+        CREATE TABLE IF NOT EXISTS proposals (
+            id              TEXT    PRIMARY KEY,
+            session_id      TEXT    NOT NULL,
+            title           TEXT    NOT NULL,
+            status          TEXT    NOT NULL DEFAULT 'PENDING',
+            risk            TEXT    NOT NULL DEFAULT 'LOW',
+            created_at      TEXT    NOT NULL,
+            updated_at      TEXT    NOT NULL,
+            changes_json    TEXT    NOT NULL DEFAULT '[]',
+            evidence_json   TEXT    NOT NULL DEFAULT '[]',
+            FOREIGN KEY (session_id) REFERENCES sessions(id)
+        );
+
+        CREATE INDEX IF NOT EXISTS idx_proposals_session
+            ON proposals(session_id);
         """;
 }
 
