@@ -1,0 +1,51 @@
+{
+  "$id": "https://dmca.local/schemas/proposal.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Proposal",
+  "type": "object",
+  "$defs": {
+    "ProposalStatus": { "type": "string", "enum": ["PENDING","APPROVED","REJECTED"] },
+    "EstimatedRisk": { "type": "string", "enum": ["LOW","MEDIUM","HIGH"] },
+    "Evidence": {
+      "type": "object",
+      "required": ["kind"],
+      "properties": {
+        "kind": { "type": "string", "enum": ["inventory_field","user_fact","policy_block"] },
+        "path": { "type": "string" },
+        "value": {},
+        "note": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "Action": {
+      "type": "object",
+      "required": ["actionType","targetId"],
+      "properties": {
+        "actionType": { "type": "string", "enum": ["CREATE_RESTORE_POINT","UNINSTALL_DRIVER_PACKAGE","UNINSTALL_DEVICE","DISABLE_SERVICE","UNINSTALL_PROGRAM","RESCAN_AND_COMPARE"] },
+        "targetId": { "type": "string", "pattern": "^(drv:|svc:|pkg:|app:)[A-Za-z0-9._:-]+$" },
+        "mode": { "type": "string", "enum": ["NORMAL","DRY_RUN_FIRST"] },
+        "parameters": { "type": "object" }
+      },
+      "additionalProperties": false
+    },
+    "ProposalChange": {
+      "type": "object",
+      "required": ["type","targetId","reason"],
+      "properties": {
+        "type": { "type": "string", "enum": ["score_delta","recommendation","pin_protect","action_add","action_remove","note_add","fact_request"] },
+        "targetId": { "type": "string", "pattern": "^(drv:|svc:|pkg:|app:)[A-Za-z0-9._:-]+$" },
+        "delta": { "type": "integer" },
+        "value": { "type": "string" },
+        "note": { "type": "string" },
+        "action": { "$ref": "#/$defs/Action" },
+        "reason": { "type": "string", "minLength": 1 },
+        "factRequest": {
+          "type": "object",
+          "properties": { "factKey": { "type": "string" }, "prompt": { "type": "string" } },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "$id": "https://dmca.local/schemas/plan.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DecisionPlan",
+  "type": "object",
+  "$defs": {
+    "Recommendation": {
+      "type": "string",
+      "enum": ["KEEP", "REVIEW", "REMOVE_STAGE_1", "REMOVE_STAGE_2", "BLOCKED"]
+    },
+    "PlanItem": {
+      "type": "object",
+      "required": ["itemId","baselineScore","aiScoreDelta","finalScore","recommendation","hardBlocks","engineRationale"],
+      "properties": {
+        "itemId": { "type": "string", "pattern": "^(drv:|svc:|pkg:|app:)[A-Za-z0-9._:-]+$" },
+        "baselineScore": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "aiScoreDelta": { "type": "integer", "minimum": -100, "maximum": 100 },
+        "finalScore": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "recommendation": { "$ref": "#/$defs/Recommendation" },
+        "hardBlocks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["code","message"],
+            "properties": {
+              "code": {
+                "type": "string",
+                "enum": ["MICROSOFT_INBOX","BOOT_CRITICAL","PRESENT_HARDWARE_BINDING","POLICY_PROTECTED","DEPENDENCY_REQUIRED"]
+              },
+              "message": { "type": "string" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "engineRationale": { "type": "array", "items": { "type": "string" } },
+        "aiRationale": { "type": "array", "items": { "type": "string" } },
+        "notes": { "type": "array", "items": { "type": "string" } },
+        "blockedReason": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "DecisionPlan": {
+      "type": "object",
+      "required": ["id","sessionId","createdAt","items"],
+      "properties": {
+        "id": { "type": "string", "format": "uuid" },
+        "sessionId": { "type": "string", "format": "uuid" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "items": { "type": "array", "items": { "$ref": "#/$defs/PlanItem" } }
+      },
+      "additionalProperties": false
+    }
+  }
+}

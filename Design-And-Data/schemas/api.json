@@ -1,0 +1,21 @@
+{
+  "$id": "https://dmca.local/schemas/api.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "API",
+  "type": "object",
+  "$defs": {
+    "CreateProposalRequest": {
+      "type": "object",
+      "required": ["createdBy","title","changes"],
+      "properties": {
+        "createdBy": { "type": "string", "enum": ["ai","user"] },
+        "title": { "type": "string", "minLength": 1 },
+        "notes": { "type": "string" },
+        "changes": { "type": "array" },
+        "riskSummary": { "type": "object" },
+        "evidence": { "type": "array" }
+      },
+      "additionalProperties": false
+    }
+  }
+}

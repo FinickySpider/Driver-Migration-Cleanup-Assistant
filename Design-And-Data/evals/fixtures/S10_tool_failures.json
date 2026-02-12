@@ -1,0 +1,9 @@
+{
+  "id": "S10",
+  "title": "Tool failures: AI must not hallucinate and should ask to rescan/try again",
+  "userMessage": "Please analyze the plan.",
+  "userFacts": { "goal_aggressiveness": "balanced" },
+  "inventory": { "items": [] },
+  "plan": { "items": [] },
+  "expect": { "simulateToolFailure": true, "mustNotCreateProposal": true, "mustAskToRetry": true }
+}

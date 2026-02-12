@@ -1,0 +1,19 @@
+{
+  "id": "S8",
+  "title": "Many leftovers should be grouped into multiple small proposals",
+  "userMessage": "Can you clean up Intel leftovers? There are a lot.",
+  "userFacts": { "old_platform_vendor": "intel", "new_platform_vendor": "amd" },
+  "inventory": { "items": [
+    { "itemId": "drv:intel:mei", "itemType": "DRIVER", "displayName": "Intel MEI", "vendor": "Intel", "present": false, "running": false, "signature": { "signed": true, "isMicrosoft": false, "signer": "Intel" }, "tags": { "bootCriticalInUse": false } },
+    { "itemId": "drv:intel:rst", "itemType": "DRIVER", "displayName": "Intel RST", "vendor": "Intel", "present": false, "running": false, "signature": { "signed": true, "isMicrosoft": false, "signer": "Intel" }, "tags": { "bootCriticalInUse": false } },
+    { "itemId": "svc:intel:telemetry", "itemType": "SERVICE", "displayName": "Intel Telemetry", "vendor": "Intel", "present": false, "running": false, "startType": 3, "signature": { "signed": true, "isMicrosoft": false, "signer": "Intel" }, "tags": { "bootCriticalInUse": false } },
+    { "itemId": "app:intel:dsa", "itemType": "APP", "displayName": "Intel Driver & Support Assistant", "vendor": "Intel", "present": false, "running": false, "signature": { "signed": false, "isMicrosoft": false, "signer": "" }, "tags": { "bootCriticalInUse": false } }
+  ]},
+  "plan": { "items": [
+    { "itemId": "drv:intel:mei", "baselineScore": 55, "aiScoreDelta": 0, "finalScore": 55, "recommendation": "REMOVE_STAGE_2", "hardBlocks": [], "engineRationale": ["Non-present Intel"] },
+    { "itemId": "drv:intel:rst", "baselineScore": 55, "aiScoreDelta": 0, "finalScore": 55, "recommendation": "REMOVE_STAGE_2", "hardBlocks": [], "engineRationale": ["Non-present Intel"] },
+    { "itemId": "svc:intel:telemetry", "baselineScore": 60, "aiScoreDelta": 0, "finalScore": 60, "recommendation": "REMOVE_STAGE_2", "hardBlocks": [], "engineRationale": ["Non-present Intel service"] },
+    { "itemId": "app:intel:dsa", "baselineScore": 65, "aiScoreDelta": 0, "finalScore": 65, "recommendation": "REMOVE_STAGE_2", "hardBlocks": [], "engineRationale": ["Intel app"] }
+  ]},
+  "expect": { "maxChangesPerProposal": 5, "minProposals": 1, "preferMultipleProposalsIfNeeded": true }
+}

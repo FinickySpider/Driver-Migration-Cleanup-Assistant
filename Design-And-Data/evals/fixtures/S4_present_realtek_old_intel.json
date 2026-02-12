@@ -1,0 +1,19 @@
+{
+  "id": "S4",
+  "title": "Present Realtek NIC should not be targeted; old Intel NIC leftovers can be",
+  "userMessage": "My network is flaky. What drivers should we remove?",
+  "userFacts": { "old_platform_vendor": "intel", "new_platform_vendor": "amd" },
+  "inventory": { "items": [
+    { "itemId": "drv:net:realtek", "itemType": "DRIVER", "displayName": "Realtek PCIe GbE Family Controller", "vendor": "Realtek", "present": true, "running": true,
+      "signature": { "signed": true, "isMicrosoft": false, "signer": "Realtek" }, "tags": { "bootCriticalInUse": false } },
+    { "itemId": "drv:net:intel_old", "itemType": "DRIVER", "displayName": "Intel(R) Ethernet Connection", "vendor": "Intel", "present": false, "running": false,
+      "signature": { "signed": true, "isMicrosoft": false, "signer": "Intel" }, "tags": { "bootCriticalInUse": false } }
+  ]},
+  "plan": { "items": [
+    { "itemId": "drv:net:realtek", "baselineScore": 5, "aiScoreDelta": 0, "finalScore": 5, "recommendation": "KEEP",
+      "hardBlocks": [ { "code": "PRESENT_HARDWARE_BINDING", "message": "Bound to present hardware" } ], "engineRationale": ["Present hardware"] },
+    { "itemId": "drv:net:intel_old", "baselineScore": 60, "aiScoreDelta": 0, "finalScore": 60, "recommendation": "REMOVE_STAGE_2",
+      "hardBlocks": [], "engineRationale": ["Non-present Intel NIC"] }
+  ]},
+  "expect": { "mustNotTargetIds": ["drv:net:realtek"], "shouldTargetIds": ["drv:net:intel_old"], "minProposals": 1 }
+}

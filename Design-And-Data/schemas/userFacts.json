@@ -1,0 +1,50 @@
+{
+  "$id": "https://dmca.local/schemas/userFacts.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "UserFacts",
+  "type": "object",
+  "required": [
+    "sessionId",
+    "facts"
+  ],
+  "properties": {
+    "sessionId": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "key",
+          "value",
+          "source",
+          "createdAt"
+        ],
+        "properties": {
+          "key": {
+            "type": "string",
+            "minLength": 1
+          },
+          "value": {
+            "type": "string"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "USER",
+              "AI"
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,44 @@
+{
+  "$id": "https://dmca.local/schemas/session.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Session",
+  "type": "object",
+  "required": [
+    "id",
+    "createdAt",
+    "updatedAt",
+    "status",
+    "appVersion"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "NEW",
+        "SCANNED",
+        "PLANNED",
+        "PENDING_APPROVALS",
+        "READY_TO_EXECUTE",
+        "EXECUTING",
+        "COMPLETED",
+        "FAILED"
+      ]
+    },
+    "appVersion": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

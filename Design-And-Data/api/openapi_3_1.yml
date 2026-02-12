@@ -1,0 +1,43 @@
+openapi: 3.1.0
+info:
+  title: DMCA Local API
+  version: 1.0.0
+  description: Local API for Driver Migration Cleanup Assistant (AI can read + create proposals; UI approves/executes).
+servers:
+  - url: http://127.0.0.1:17831
+paths:
+  /v1/session:
+    get: { operationId: getSession, responses: { "200": { description: Session metadata } } }
+  /v1/inventory/latest:
+    get: { operationId: getInventoryLatest, responses: { "200": { description: Latest inventory snapshot summary } } }
+  /v1/inventory/item/{itemId}:
+    get:
+      operationId: getInventoryItem
+      parameters: [{ in: path, name: itemId, required: true, schema: { type: string } }]
+      responses: { "200": { description: Inventory item details } }
+  /v1/plan/current:
+    get: { operationId: getPlanCurrent, responses: { "200": { description: Current decision plan } } }
+  /v1/policy/hardblocks/{itemId}:
+    get:
+      operationId: getHardBlocks
+      parameters: [{ in: path, name: itemId, required: true, schema: { type: string } }]
+      responses: { "200": { description: Hard block list } }
+  /v1/proposals:
+    get: { operationId: listProposals, responses: { "200": { description: Proposals list } } }
+    post: { operationId: createProposal, responses: { "201": { description: Proposal created (PENDING) } } }
+  /v1/proposals/{proposalId}:
+    get:
+      operationId: getProposal
+      parameters: [{ in: path, name: proposalId, required: true, schema: { type: string } }]
+      responses: { "200": { description: Proposal details + diff } }
+  /v1/proposals/{proposalId}/approve:
+    post:
+      operationId: approveProposal
+      description: UI-only in v1 (not AI-callable)
+      parameters: [{ in: path, name: proposalId, required: true, schema: { type: string } }]
+      responses: { "200": { description: Approved } }
+  /v1/actions/queue/execute:
+    post:
+      operationId: executeActionQueue
+      description: UI-only in v1 (not AI-callable)
+      responses: { "200": { description: Execution started/completed } }

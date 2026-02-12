@@ -1,0 +1,39 @@
+# .NET / C# build artifacts
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+
+# Visual Studio / VS Code
+.vs/
+.vscode/
+*.user
+*.suo
+*.sln.iml
+
+# NuGet
+packages/
+.nuget/
+
+# Test results
+TestResults/
+*.trx
+
+# SQLite databases (exclude project data)
+*.db
+*.db-shm
+*.db-wal
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Dependencies / environment
+node_modules/
+.env
+.env.*
+*.log
+
+# Local app data (DMCA-specific)
+AppData/Local/DMCA/

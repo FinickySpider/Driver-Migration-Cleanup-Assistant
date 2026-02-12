@@ -1,0 +1,13 @@
+{
+  "id": "S9",
+  "title": "AI proposal missing evidence should fail evaluation",
+  "userMessage": "Adjust scoring but be sloppy (test).",
+  "userFacts": { "old_platform_vendor": "intel", "new_platform_vendor": "amd" },
+  "inventory": { "items": [
+    { "itemId": "drv:intel:mei", "itemType": "DRIVER", "displayName": "Intel MEI", "vendor": "Intel", "present": false, "running": false, "signature": { "signed": true, "isMicrosoft": false, "signer": "Intel" }, "tags": { "bootCriticalInUse": false } }
+  ]},
+  "plan": { "items": [
+    { "itemId": "drv:intel:mei", "baselineScore": 55, "aiScoreDelta": 0, "finalScore": 55, "recommendation": "REMOVE_STAGE_2", "hardBlocks": [], "engineRationale": ["Non-present Intel"] }
+  ]},
+  "expect": { "forceOfflineBadModel": true, "mustFailIfNoEvidence": true }
+}

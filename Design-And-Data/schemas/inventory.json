@@ -1,0 +1,79 @@
+{
+  "$id": "https://dmca.local/schemas/inventory.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Inventory",
+  "type": "object",
+  "$defs": {
+    "InventorySnapshot": {
+      "type": "object",
+      "required": ["id", "sessionId", "createdAt", "summary"],
+      "properties": {
+        "id": { "type": "string", "format": "uuid" },
+        "sessionId": { "type": "string", "format": "uuid" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "summary": {
+          "type": "object",
+          "required": ["counts"],
+          "properties": {
+            "counts": {
+              "type": "object",
+              "required": ["drivers", "services", "packages", "apps"],
+              "properties": {
+                "drivers": { "type": "integer", "minimum": 0 },
+                "services": { "type": "integer", "minimum": 0 },
+                "packages": { "type": "integer", "minimum": 0 },
+                "apps": { "type": "integer", "minimum": 0 }
+              },
+              "additionalProperties": false
+            },
+            "platform": {
+              "type": "object",
+              "properties": {
+                "motherboardVendor": { "type": "string" },
+                "motherboardProduct": { "type": "string" },
+                "cpu": { "type": "string" },
+                "osVersion": { "type": "string" }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "InventoryItem": {
+      "type": "object",
+      "required": ["itemId", "itemType", "displayName"],
+      "properties": {
+        "itemId": { "type": "string", "pattern": "^(drv:|svc:|pkg:|app:)[A-Za-z0-9._:-]+$" },
+        "itemType": { "type": "string", "enum": ["DRIVER", "SERVICE", "DRIVER_PACKAGE", "APP"] },
+        "displayName": { "type": "string", "minLength": 1 },
+        "vendor": { "type": "string" },
+        "provider": { "type": "string" },
+        "version": { "type": "string" },
+        "driverInf": { "type": "string" },
+        "driverStorePublishedName": { "type": "string" },
+        "deviceHardwareIds": { "type": "array", "items": { "type": "string" } },
+        "present": { "type": "boolean" },
+        "running": { "type": "boolean" },
+        "startType": { "type": "integer", "minimum": 0, "maximum": 4 },
+        "signature": {
+          "type": "object",
+          "properties": {
+            "signed": { "type": "boolean" },
+            "signer": { "type": "string" },
+            "isMicrosoft": { "type": "boolean" },
+            "isWHQL": { "type": "boolean" }
+          },
+          "additionalProperties": false
+        },
+        "paths": { "type": "array", "items": { "type": "string" } },
+        "installDate": { "type": "string", "format": "date-time" },
+        "lastLoadedDate": { "type": "string", "format": "date-time" },
+        "dependencies": { "type": "array", "items": { "type": "string" } }
+      },
+      "additionalProperties": false
+    }
+  }
+}

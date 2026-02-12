@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Dmca.App/Dmca.App.csproj" />
+    <Project Path="src/Dmca.Core/Dmca.Core.csproj" />
+    <Project Path="src/Dmca.Data/Dmca.Data.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Dmca.Tests/Dmca.Tests.csproj" />
+  </Folder>
+</Solution>

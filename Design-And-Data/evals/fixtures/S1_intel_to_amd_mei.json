@@ -1,0 +1,15 @@
+{
+  "id": "S1",
+  "title": "Intel -> AMD migration: Intel MEI leftovers non-present",
+  "userMessage": "I swapped from Intel to AMD. Can you help clean up leftovers?",
+  "userFacts": { "old_platform_vendor": "intel", "new_platform_vendor": "amd", "goal_aggressiveness": "balanced" },
+  "inventory": { "items": [
+    { "itemId": "drv:intel:mei", "itemType": "DRIVER", "displayName": "Intel(R) Management Engine Interface", "vendor": "Intel", "present": false, "running": false, "signature": { "signed": true, "isMicrosoft": false, "signer": "Intel" }, "tags": { "bootCriticalInUse": false } },
+    { "itemId": "svc:intel:mei", "itemType": "SERVICE", "displayName": "Intel(R) MEI Service", "vendor": "Intel", "present": false, "running": false, "startType": 3, "signature": { "signed": true, "isMicrosoft": false, "signer": "Intel" }, "tags": { "bootCriticalInUse": false } }
+  ]},
+  "plan": { "items": [
+    { "itemId": "drv:intel:mei", "baselineScore": 55, "aiScoreDelta": 0, "finalScore": 55, "recommendation": "REMOVE_STAGE_2", "hardBlocks": [], "engineRationale": ["Device not present"] },
+    { "itemId": "svc:intel:mei", "baselineScore": 50, "aiScoreDelta": 0, "finalScore": 50, "recommendation": "REVIEW", "hardBlocks": [], "engineRationale": ["Vendor Intel; not present"] }
+  ]},
+  "expect": { "mustUseTools": ["get_plan_current","get_inventory_item","create_proposal"], "mustNotProposeRemovalForHardBlocked": true, "maxChangesPerProposal": 5, "minProposals": 1, "mustIncludeEvidence": true }
+}

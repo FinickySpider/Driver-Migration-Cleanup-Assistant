@@ -1,0 +1,24 @@
+{
+  "$id": "https://dmca.local/schemas/common.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Common",
+  "type": "object",
+  "$defs": {
+    "UUID": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "ISODateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "NonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ItemId": {
+      "type": "string",
+      "pattern": "^(drv:|svc:|pkg:|app:)[A-Za-z0-9._:-]+$"
+    }
+  }
+}

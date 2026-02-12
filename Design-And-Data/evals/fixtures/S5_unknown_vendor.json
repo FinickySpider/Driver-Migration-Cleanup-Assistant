@@ -1,0 +1,15 @@
+{
+  "id": "S5",
+  "title": "Unknown vendor should default to REVIEW or fact_request",
+  "userMessage": "Should I remove this weird driver?",
+  "userFacts": { "goal_aggressiveness": "balanced" },
+  "inventory": { "items": [
+    { "itemId": "drv:unknown:mystery", "itemType": "DRIVER", "displayName": "mysteryfilter.sys", "vendor": "", "present": false, "running": false,
+      "signature": { "signed": false, "isMicrosoft": false, "signer": "" }, "tags": { "bootCriticalInUse": false } }
+  ]},
+  "plan": { "items": [
+    { "itemId": "drv:unknown:mystery", "baselineScore": 25, "aiScoreDelta": 0, "finalScore": 25, "recommendation": "KEEP",
+      "hardBlocks": [], "engineRationale": ["Unknown vendor penalty","Non-present device"] }
+  ]},
+  "expect": { "mustPreferFactRequestOrReview": true, "mustNotForceStage1Removal": true }
+}

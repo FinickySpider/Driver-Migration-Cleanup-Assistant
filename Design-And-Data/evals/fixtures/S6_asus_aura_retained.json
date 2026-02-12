@@ -1,0 +1,15 @@
+{
+  "id": "S6",
+  "title": "User retained ASUS Aura peripheral: reduce removal confidence",
+  "userMessage": "I still use Aura lighting, but I swapped boards. What should we remove?",
+  "userFacts": { "retained_peripherals": "ASUS Aura controller", "goal_aggressiveness": "balanced" },
+  "inventory": { "items": [
+    { "itemId": "svc:asus:aura", "itemType": "SERVICE", "displayName": "ASUS Aura Service", "vendor": "ASUS", "present": false, "running": false, "startType": 2,
+      "signature": { "signed": true, "isMicrosoft": false, "signer": "ASUS" }, "tags": { "bootCriticalInUse": false } }
+  ]},
+  "plan": { "items": [
+    { "itemId": "svc:asus:aura", "baselineScore": 70, "aiScoreDelta": 0, "finalScore": 70, "recommendation": "REMOVE_STAGE_2",
+      "hardBlocks": [], "engineRationale": ["Non-present ASUS service"] }
+  ]},
+  "expect": { "shouldReduceRemovalConfidence": true, "minProposals": 1 }
+}
