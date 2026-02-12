@@ -1,0 +1,92 @@
+<UserControl x:Class="Dmca.App.Views.ItemDetailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:Dmca.App.ViewModels"
+             d:DataContext="{d:DesignInstance Type=vm:ItemDetailViewModel}"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Background="{StaticResource BackgroundBrush}">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="32">
+        <StackPanel MaxWidth="700" HorizontalAlignment="Left">
+
+            <TextBlock Text="Item Detail" Style="{StaticResource SectionHeading}" />
+
+            <!-- No item selected -->
+            <TextBlock Text="Select an item from the Inventory view to see its details."
+                       Foreground="{StaticResource TextSecondaryBrush}" FontSize="14"
+                       Visibility="{Binding Item, Converter={StaticResource NullToVisibleConverter}}" />
+
+            <!-- Item details -->
+            <StackPanel Visibility="{Binding Item, Converter={StaticResource NullToCollapsedConverter}}">
+                <Border Style="{StaticResource Card}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="140" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Item ID" FontWeight="SemiBold" Margin="0,4" />
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Item.ItemId}" Margin="0,4" TextWrapping="Wrap" />
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Type" FontWeight="SemiBold" Margin="0,4" />
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding Item.ItemType}" Margin="0,4" />
+
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Display Name" FontWeight="SemiBold" Margin="0,4" />
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Item.DisplayName}" Margin="0,4" TextWrapping="Wrap" />
+
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Vendor" FontWeight="SemiBold" Margin="0,4" />
+                        <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding Item.Vendor}" Margin="0,4" />
+
+                        <TextBlock Grid.Row="4" Grid.Column="0" Text="Version" FontWeight="SemiBold" Margin="0,4" />
+                        <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding Item.Version}" Margin="0,4" />
+
+                        <TextBlock Grid.Row="5" Grid.Column="0" Text="Present" FontWeight="SemiBold" Margin="0,4" />
+                        <TextBlock Grid.Row="5" Grid.Column="1" Text="{Binding Item.Present}" Margin="0,4" />
+
+                        <TextBlock Grid.Row="6" Grid.Column="0" Text="Driver INF" FontWeight="SemiBold" Margin="0,4" />
+                        <TextBlock Grid.Row="6" Grid.Column="1" Text="{Binding Item.DriverInf}" Margin="0,4" TextWrapping="Wrap" />
+
+                        <TextBlock Grid.Row="7" Grid.Column="0" Text="Install Date" FontWeight="SemiBold" Margin="0,4" />
+                        <TextBlock Grid.Row="7" Grid.Column="1" Text="{Binding Item.InstallDate, StringFormat='{}{0:yyyy-MM-dd}'}" Margin="0,4" />
+                    </Grid>
+                </Border>
+
+                <!-- Plan Info (if available) -->
+                <Border Style="{StaticResource Card}" Margin="8,16,8,8"
+                        Visibility="{Binding PlanItem, Converter={StaticResource NullToCollapsedConverter}}">
+                    <StackPanel>
+                        <TextBlock Text="Plan Assessment" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,12" />
+                        <StackPanel Orientation="Horizontal" Margin="0,4">
+                            <TextBlock Text="Recommendation: " FontWeight="SemiBold" />
+                            <TextBlock Text="{Binding PlanItem.Recommendation}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,4">
+                            <TextBlock Text="Baseline Score: " FontWeight="SemiBold" />
+                            <TextBlock Text="{Binding PlanItem.BaselineScore}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,4">
+                            <TextBlock Text="AI Delta: " FontWeight="SemiBold" />
+                            <TextBlock Text="{Binding PlanItem.AiScoreDelta}" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,4">
+                            <TextBlock Text="Final Score: " FontWeight="SemiBold" />
+                            <TextBlock Text="{Binding PlanItem.FinalScore}" />
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

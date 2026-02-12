@@ -1,7 +1,7 @@
 ---
 id: PHASE-03
 type: phase
-status: planned
+status: complete
 owner: ""
 ---
 
@@ -46,11 +46,11 @@ Build the action queue, execution engine, and desktop UI. By the end of this pha
 
 ## Completion Criteria
 
-- [ ] Action queue builds correctly from an approved plan
-- [ ] Restore point is created before any destructive action
-- [ ] All five action types execute successfully
-- [ ] Dry-run mode produces correct preview without side effects
-- [ ] UI displays inventory table with all required columns
-- [ ] Proposal diff screen shows changes clearly
-- [ ] Two-step confirmation works for high-risk queues
-- [ ] Audit log captures every executed action
+- [x] Action queue builds correctly from an approved plan
+- [x] Restore point is created before any destructive action
+- [x] All five action types execute successfully
+- [x] Dry-run mode produces correct preview without side effects
+- [x] UI displays inventory table with all required columns
+- [x] Proposal diff screen shows changes clearly
+- [x] Two-step confirmation works for high-risk queues
+- [x] Audit log captures every executed action

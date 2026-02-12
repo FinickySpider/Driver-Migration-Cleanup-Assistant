@@ -9,11 +9,11 @@ Driver Migration Cleanup Assistant (DMCA)
 
 ## Active Phase
 
-- [PHASE-03: Execution & UI](../phases/PHASE-03-execution-and-ui.md) — active
+- [PHASE-04: Verification & Hardening](../phases/PHASE-04-verification-and-hardening.md) — planned
 
 ## Active Sprint
 
-- [SPRINT-05](../sprints/SPRINT-05.md) — planned
+- [SPRINT-07](../sprints/SPRINT-07.md) — planned
 
 ## In Progress
 
@@ -23,7 +23,7 @@ Driver Migration Cleanup Assistant (DMCA)
 
 - [PHASE-01: Foundation & Inventory](../phases/PHASE-01-foundation-and-inventory.md) — complete (2025-07-15)
 - [PHASE-02: Scoring Engine & AI Advisor](../phases/PHASE-02-scoring-engine-and-ai-advisor.md) — complete (2026-02-12)
-- [PHASE-03: Execution & UI](../phases/PHASE-03-execution-and-ui.md) — active
+- [PHASE-03: Execution & UI](../phases/PHASE-03-execution-and-ui.md) — complete (2026-02-12)
 - [PHASE-04: Verification & Hardening](../phases/PHASE-04-verification-and-hardening.md) — planned
 
 ## Sprints
@@ -32,8 +32,8 @@ Driver Migration Cleanup Assistant (DMCA)
 - [SPRINT-02](../sprints/SPRINT-02.md) — complete (PHASE-01)
 - [SPRINT-03](../sprints/SPRINT-03.md) — complete (PHASE-02)
 - [SPRINT-04](../sprints/SPRINT-04.md) — complete (PHASE-02)
-- [SPRINT-05](../sprints/SPRINT-05.md) — planned (PHASE-03)
-- [SPRINT-06](../sprints/SPRINT-06.md) — planned (PHASE-03)
+- [SPRINT-05](../sprints/SPRINT-05.md) — complete (PHASE-03)
+- [SPRINT-06](../sprints/SPRINT-06.md) — complete (PHASE-03)
 - [SPRINT-07](../sprints/SPRINT-07.md) — planned (PHASE-04)
 - [SPRINT-08](../sprints/SPRINT-08.md) — planned (PHASE-04)
 
@@ -67,21 +67,21 @@ Driver Migration Cleanup Assistant (DMCA)
 - [FEAT-019: Proposal merge](../features/FEAT-019-proposal-merge.md) — complete
 
 ### SPRINT-05 (PHASE-03)
-- [FEAT-020: Action queue builder](../features/FEAT-020-action-queue-builder.md) — planned
-- [FEAT-021: Restore point creation](../features/FEAT-021-restore-point-creation.md) — planned
-- [FEAT-022: Driver uninstall action](../features/FEAT-022-driver-uninstall-action.md) — planned
-- [FEAT-023: Service disable action](../features/FEAT-023-service-disable-action.md) — planned
-- [FEAT-024: Program uninstall action](../features/FEAT-024-program-uninstall-action.md) — planned
-- [FEAT-025: Execution audit logging](../features/FEAT-025-execution-audit-logging.md) — planned
+- [FEAT-020: Action queue builder](../features/FEAT-020-action-queue-builder.md) — complete
+- [FEAT-021: Restore point creation](../features/FEAT-021-restore-point-creation.md) — complete
+- [FEAT-022: Driver uninstall action](../features/FEAT-022-driver-uninstall-action.md) — complete
+- [FEAT-023: Service disable action](../features/FEAT-023-service-disable-action.md) — complete
+- [FEAT-024: Program uninstall action](../features/FEAT-024-program-uninstall-action.md) — complete
+- [FEAT-025: Execution audit logging](../features/FEAT-025-execution-audit-logging.md) — complete
 
 ### SPRINT-06 (PHASE-03)
-- [FEAT-026: UI shell and navigation](../features/FEAT-026-ui-shell-navigation.md) — planned
-- [FEAT-027: Interview wizard](../features/FEAT-027-interview-wizard.md) — planned
-- [FEAT-028: Inventory table view](../features/FEAT-028-inventory-table-view.md) — planned
-- [FEAT-029: Item detail pane](../features/FEAT-029-item-detail-pane.md) — planned
-- [FEAT-030: AI chat pane](../features/FEAT-030-ai-chat-pane.md) — planned
-- [FEAT-031: Proposal review screen](../features/FEAT-031-proposal-review-screen.md) — planned
-- [FEAT-032: Execute screen](../features/FEAT-032-execute-screen.md) — planned
+- [FEAT-026: UI shell and navigation](../features/FEAT-026-ui-shell-navigation.md) — complete
+- [FEAT-027: Interview wizard](../features/FEAT-027-interview-wizard.md) — complete
+- [FEAT-028: Inventory table view](../features/FEAT-028-inventory-table-view.md) — complete
+- [FEAT-029: Item detail pane](../features/FEAT-029-item-detail-pane.md) — complete
+- [FEAT-030: AI chat pane](../features/FEAT-030-ai-chat-pane.md) — complete
+- [FEAT-031: Proposal review screen](../features/FEAT-031-proposal-review-screen.md) — complete
+- [FEAT-032: Execute screen](../features/FEAT-032-execute-screen.md) — complete
 
 ### SPRINT-07 (PHASE-04)
 - [FEAT-033: Rescan snapshot](../features/FEAT-033-rescan-snapshot.md) — planned

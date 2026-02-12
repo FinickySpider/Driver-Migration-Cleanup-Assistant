@@ -153,6 +153,56 @@ public sealed class DmcaDbContext
 
         CREATE INDEX IF NOT EXISTS idx_proposals_session
             ON proposals(session_id);
+
+        CREATE TABLE IF NOT EXISTS action_queues (
+            id              TEXT    PRIMARY KEY,
+            session_id      TEXT    NOT NULL,
+            created_at      TEXT    NOT NULL,
+            mode            TEXT    NOT NULL,
+            overall_status  TEXT    NOT NULL DEFAULT 'PENDING',
+            FOREIGN KEY (session_id) REFERENCES sessions(id)
+        );
+
+        CREATE INDEX IF NOT EXISTS idx_action_queues_session
+            ON action_queues(session_id);
+
+        CREATE TABLE IF NOT EXISTS actions (
+            id              TEXT    PRIMARY KEY,
+            queue_id        TEXT    NOT NULL,
+            order_num       INTEGER NOT NULL,
+            action_type     TEXT    NOT NULL,
+            target_id       TEXT    NOT NULL,
+            display_name    TEXT    NOT NULL,
+            status          TEXT    NOT NULL DEFAULT 'PENDING',
+            command         TEXT,
+            output          TEXT,
+            error_message   TEXT,
+            started_at      TEXT,
+            completed_at    TEXT,
+            FOREIGN KEY (queue_id) REFERENCES action_queues(id)
+        );
+
+        CREATE INDEX IF NOT EXISTS idx_actions_queue
+            ON actions(queue_id);
+
+        CREATE TABLE IF NOT EXISTS audit_log (
+            id              TEXT    PRIMARY KEY,
+            session_id      TEXT    NOT NULL,
+            action_id       TEXT    NOT NULL,
+            action_type     TEXT    NOT NULL,
+            target_id       TEXT    NOT NULL,
+            status          TEXT    NOT NULL,
+            timestamp       TEXT    NOT NULL,
+            output          TEXT,
+            error_message   TEXT,
+            FOREIGN KEY (session_id) REFERENCES sessions(id)
+        );
+
+        CREATE INDEX IF NOT EXISTS idx_audit_log_session
+            ON audit_log(session_id);
+
+        CREATE INDEX IF NOT EXISTS idx_audit_log_action
+            ON audit_log(action_id);
         """;
 }
 

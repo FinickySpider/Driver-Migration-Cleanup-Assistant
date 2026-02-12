@@ -1,0 +1,82 @@
+<UserControl x:Class="Dmca.App.Views.InterviewView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:Dmca.App.ViewModels"
+             xmlns:local="clr-namespace:Dmca.App.Views"
+             d:DataContext="{d:DesignInstance Type=vm:InterviewViewModel}"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Background="{StaticResource BackgroundBrush}">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="32">
+        <StackPanel MaxWidth="700" HorizontalAlignment="Left">
+
+            <TextBlock Text="Session Interview" Style="{StaticResource SectionHeading}" FontSize="26" Margin="0,0,0,8" />
+            <TextBlock Text="Help us understand your hardware migration to produce accurate cleanup recommendations."
+                       Foreground="{StaticResource TextSecondaryBrush}" FontSize="14" Margin="0,0,0,24" TextWrapping="Wrap" />
+
+            <!-- Step indicator -->
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                <TextBlock FontSize="13" Foreground="{StaticResource TextSecondaryBrush}">
+                    <Run Text="Step " /><Run Text="{Binding CurrentStep, Mode=OneWay, StringFormat='{}{0}'}" />
+                    <Run Text=" of " /><Run Text="{Binding TotalSteps, Mode=OneWay}" />
+                </TextBlock>
+            </StackPanel>
+
+            <!-- Step 0: Previous Hardware -->
+            <Border Style="{StaticResource Card}" Visibility="{Binding CurrentStep, Converter={x:Static local:StepVisibilityConverter.Instance}, ConverterParameter=0}">
+                <StackPanel>
+                    <TextBlock Text="Previous Hardware" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,8" />
+                    <TextBlock Text="Describe the hardware you are migrating FROM (motherboard, CPU, GPU, etc.)."
+                               Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,12" TextWrapping="Wrap" />
+                    <TextBox Text="{Binding PreviousHardware, UpdateSourceTrigger=PropertyChanged}"
+                             AcceptsReturn="True" TextWrapping="Wrap" MinHeight="80"
+                             Padding="8" FontSize="14" />
+                </StackPanel>
+            </Border>
+
+            <!-- Step 1: New Hardware -->
+            <Border Style="{StaticResource Card}" Visibility="{Binding CurrentStep, Converter={x:Static local:StepVisibilityConverter.Instance}, ConverterParameter=1}">
+                <StackPanel>
+                    <TextBlock Text="New Hardware" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,8" />
+                    <TextBlock Text="Describe the hardware you migrated TO."
+                               Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,12" TextWrapping="Wrap" />
+                    <TextBox Text="{Binding NewHardware, UpdateSourceTrigger=PropertyChanged}"
+                             AcceptsReturn="True" TextWrapping="Wrap" MinHeight="80"
+                             Padding="8" FontSize="14" />
+                </StackPanel>
+            </Border>
+
+            <!-- Step 2: Notes -->
+            <Border Style="{StaticResource Card}" Visibility="{Binding CurrentStep, Converter={x:Static local:StepVisibilityConverter.Instance}, ConverterParameter=2}">
+                <StackPanel>
+                    <TextBlock Text="Additional Notes" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,8" />
+                    <TextBlock Text="Any other details (e.g., software to keep, peripherals still in use)."
+                               Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,12" TextWrapping="Wrap" />
+                    <TextBox Text="{Binding AdditionalNotes, UpdateSourceTrigger=PropertyChanged}"
+                             AcceptsReturn="True" TextWrapping="Wrap" MinHeight="80"
+                             Padding="8" FontSize="14" />
+                </StackPanel>
+            </Border>
+
+            <!-- Navigation Buttons -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+                <Button Content="← Previous" Command="{Binding PreviousStepCommand}"
+                        Style="{StaticResource PrimaryButton}" Margin="0,0,8,0" Opacity="0.8" />
+                <Button Content="Next →" Command="{Binding NextStepCommand}"
+                        Style="{StaticResource PrimaryButton}" Margin="0,0,8,0" />
+                <Button Content="✓ Finish Interview" Command="{Binding FinishCommand}"
+                        Style="{StaticResource PrimaryButton}" Background="{StaticResource SuccessBrush}" />
+            </StackPanel>
+
+            <!-- Completion message -->
+            <Border Style="{StaticResource Card}" Margin="0,20,0,0"
+                    Visibility="{Binding IsComplete, Converter={StaticResource BooleanToVisibilityConverter}}"
+                    Background="#E8F5E9">
+                <TextBlock Text="✓ Interview complete! Navigate to Inventory to start scanning."
+                           Foreground="{StaticResource SuccessBrush}" FontSize="14" FontWeight="SemiBold" />
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

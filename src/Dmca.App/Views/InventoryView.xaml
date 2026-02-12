@@ -1,0 +1,70 @@
+<UserControl x:Class="Dmca.App.Views.InventoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:Dmca.App.ViewModels"
+             d:DataContext="{d:DesignInstance Type=vm:InventoryViewModel}"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Background="{StaticResource BackgroundBrush}">
+
+    <DockPanel Margin="24">
+        <!-- Header -->
+        <StackPanel DockPanel.Dock="Top" Margin="0,0,0,16">
+            <TextBlock Text="Inventory" Style="{StaticResource SectionHeading}" />
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                <TextBox Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
+                         Width="300" Padding="8" FontSize="14"
+                         VerticalContentAlignment="Center">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox">
+                            <Setter Property="Tag" Value="🔍 Filter by name, vendor, or ID..." />
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+
+                <ComboBox SelectedItem="{Binding FilterType}" Width="150" Margin="8,0,0,0"
+                          Padding="8,6" FontSize="13">
+                    <ComboBox.Items>
+                        <x:Null />
+                        <vm:InventoryTypeOption Label="Drivers" Type="DRIVER" />
+                        <vm:InventoryTypeOption Label="Services" Type="SERVICE" />
+                        <vm:InventoryTypeOption Label="Packages" Type="DRIVER_PACKAGE" />
+                        <vm:InventoryTypeOption Label="Apps" Type="APP" />
+                    </ComboBox.Items>
+                </ComboBox>
+            </StackPanel>
+
+            <!-- Summary -->
+            <TextBlock FontSize="12" Foreground="{StaticResource TextSecondaryBrush}">
+                <Run Text="Showing " /><Run Text="{Binding FilteredItems.Count, Mode=OneWay}" />
+                <Run Text=" of " /><Run Text="{Binding Items.Count, Mode=OneWay}" />
+                <Run Text=" items" />
+            </TextBlock>
+        </StackPanel>
+
+        <!-- DataGrid -->
+        <DataGrid ItemsSource="{Binding FilteredItems}"
+                  SelectedItem="{Binding SelectedItem}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  SelectionMode="Single"
+                  GridLinesVisibility="Horizontal"
+                  HeadersVisibility="Column"
+                  CanUserSortColumns="True"
+                  AlternatingRowBackground="#FAFAFA"
+                  BorderThickness="1"
+                  BorderBrush="#E0E0E0"
+                  FontSize="13">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Type" Binding="{Binding ItemType}" Width="110" />
+                <DataGridTextColumn Header="Display Name" Binding="{Binding DisplayName}" Width="*" />
+                <DataGridTextColumn Header="Vendor" Binding="{Binding Vendor}" Width="160" />
+                <DataGridTextColumn Header="Version" Binding="{Binding Version}" Width="120" />
+                <DataGridTextColumn Header="Item ID" Binding="{Binding ItemId}" Width="200" />
+                <DataGridCheckBoxColumn Header="Present" Binding="{Binding Present, Mode=OneWay}" Width="70" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</UserControl>

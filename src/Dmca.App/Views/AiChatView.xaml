@@ -1,0 +1,51 @@
+<UserControl x:Class="Dmca.App.Views.AiChatView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:Dmca.App.ViewModels"
+             d:DataContext="{d:DesignInstance Type=vm:AiChatViewModel}"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Background="{StaticResource BackgroundBrush}">
+
+    <DockPanel Margin="24">
+        <TextBlock DockPanel.Dock="Top" Text="AI Advisor" Style="{StaticResource SectionHeading}" />
+
+        <!-- Input area -->
+        <Grid DockPanel.Dock="Bottom" Margin="0,12,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="0" Text="{Binding UserMessage, UpdateSourceTrigger=PropertyChanged}"
+                     Padding="10,8" FontSize="14" VerticalContentAlignment="Center"
+                     AcceptsReturn="False">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding SendCommand}" />
+                </TextBox.InputBindings>
+            </TextBox>
+            <Button Grid.Column="1" Content="Send" Command="{Binding SendCommand}"
+                    Style="{StaticResource PrimaryButton}" Margin="8,0,0,0"
+                    IsEnabled="{Binding IsBusy, Converter={StaticResource InverseBooleanConverter}}" />
+        </Grid>
+
+        <!-- Chat history -->
+        <Border Style="{StaticResource Card}" Margin="0">
+            <ListBox ItemsSource="{Binding ChatHistory}"
+                     BorderThickness="0"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     Background="Transparent">
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type vm:ChatEntry}">
+                        <StackPanel Margin="4,8">
+                            <TextBlock Text="{Binding Sender}" FontWeight="SemiBold" FontSize="12"
+                                       Foreground="{StaticResource PrimaryBrush}" />
+                            <TextBlock Text="{Binding Message}" TextWrapping="Wrap" FontSize="14"
+                                       Foreground="{StaticResource TextPrimaryBrush}" Margin="0,4,0,0" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+    </DockPanel>
+</UserControl>
