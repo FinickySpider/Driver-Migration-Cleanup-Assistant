@@ -9,22 +9,25 @@ Driver Migration Cleanup Assistant (DMCA)
 
 ## Active Phase
 
-- [PHASE-04: Verification & Hardening](../phases/PHASE-04-verification-and-hardening.md) — planned
+- PHASE-04 hotfixes (v1.0 pre-release stabilization)
 
 ## Active Sprint
 
-- [SPRINT-07](../sprints/SPRINT-07.md) — planned
+- [SPRINT-09](../sprints/SPRINT-09.md) — active (PHASE-04)
 
 ## In Progress
 
-- (none)
+- [BUG-001: Details page does not reflect Inventory selection](../bugs/BUG-001-details-page-does-not-reflect-inventory-selection.md) — in_progress
+- [BUG-002: Inventory type filter dropdown does nothing](../bugs/BUG-002-inventory-type-filter-dropdown-does-nothing.md) — in_progress
+- [BUG-003: Delta Report tab crashes with StaticResource error](../bugs/BUG-003-delta-report-tab-crashes-with-staticresource-error.md) — in_progress
+- [BUG-004: Cascading error dialogs on repeated UI exceptions](../bugs/BUG-004-cascading-error-dialogs-on-repeated-ui-exceptions.md) — in_progress
 
 ## Phases
 
 - [PHASE-01: Foundation & Inventory](../phases/PHASE-01-foundation-and-inventory.md) — complete (2025-07-15)
 - [PHASE-02: Scoring Engine & AI Advisor](../phases/PHASE-02-scoring-engine-and-ai-advisor.md) — complete (2026-02-12)
 - [PHASE-03: Execution & UI](../phases/PHASE-03-execution-and-ui.md) — complete (2026-02-12)
-- [PHASE-04: Verification & Hardening](../phases/PHASE-04-verification-and-hardening.md) — planned
+- [PHASE-04: Verification & Hardening](../phases/PHASE-04-verification-and-hardening.md) — complete (2025-07-19)
 
 ## Sprints
 
@@ -34,8 +37,9 @@ Driver Migration Cleanup Assistant (DMCA)
 - [SPRINT-04](../sprints/SPRINT-04.md) — complete (PHASE-02)
 - [SPRINT-05](../sprints/SPRINT-05.md) — complete (PHASE-03)
 - [SPRINT-06](../sprints/SPRINT-06.md) — complete (PHASE-03)
-- [SPRINT-07](../sprints/SPRINT-07.md) — planned (PHASE-04)
-- [SPRINT-08](../sprints/SPRINT-08.md) — planned (PHASE-04)
+- [SPRINT-07](../sprints/SPRINT-07.md) — complete (PHASE-04)
+- [SPRINT-08](../sprints/SPRINT-08.md) — complete (PHASE-04)
+- [SPRINT-09](../sprints/SPRINT-09.md) — active (PHASE-04)
 
 ## Features
 
@@ -84,22 +88,25 @@ Driver Migration Cleanup Assistant (DMCA)
 - [FEAT-032: Execute screen](../features/FEAT-032-execute-screen.md) — complete
 
 ### SPRINT-07 (PHASE-04)
-- [FEAT-033: Rescan snapshot](../features/FEAT-033-rescan-snapshot.md) — planned
-- [FEAT-034: Delta report](../features/FEAT-034-delta-report.md) — planned
-- [FEAT-035: Eval harness CI](../features/FEAT-035-eval-harness-ci.md) — planned
+- [FEAT-033: Rescan snapshot](../features/FEAT-033-rescan-snapshot.md) — complete
+- [FEAT-034: Delta report](../features/FEAT-034-delta-report.md) — complete
+- [FEAT-035: Eval harness CI](../features/FEAT-035-eval-harness-ci.md) — complete
 
 ### SPRINT-08 (PHASE-04)
-- [FEAT-036: User guide](../features/FEAT-036-user-guide.md) — planned
-- [FEAT-037: Developer guide](../features/FEAT-037-developer-guide.md) — planned
+- [FEAT-036: User guide](../features/FEAT-036-user-guide.md) — complete
+- [FEAT-037: Developer guide](../features/FEAT-037-developer-guide.md) — complete
 
 ## Refactors
 
-- [REFACTOR-001: Error handling hardening](../refactors/REFACTOR-001-error-handling-hardening.md) — planned (SPRINT-07)
-- [REFACTOR-002: Logging and performance polish](../refactors/REFACTOR-002-logging-performance-polish.md) — planned (SPRINT-08)
+- [REFACTOR-001: Error handling hardening](../refactors/REFACTOR-001-error-handling-hardening.md) — complete (SPRINT-07)
+- [REFACTOR-002: Logging and performance polish](../refactors/REFACTOR-002-logging-performance-polish.md) — complete (SPRINT-08)
 
 ## Bugs
 
-- (none)
+- [BUG-001: Details page does not reflect Inventory selection](../bugs/BUG-001-details-page-does-not-reflect-inventory-selection.md) — in_progress
+- [BUG-002: Inventory type filter dropdown does nothing](../bugs/BUG-002-inventory-type-filter-dropdown-does-nothing.md) — in_progress
+- [BUG-003: Delta Report tab crashes with StaticResource error](../bugs/BUG-003-delta-report-tab-crashes-with-staticresource-error.md) — in_progress
+- [BUG-004: Cascading error dialogs on repeated UI exceptions](../bugs/BUG-004-cascading-error-dialogs-on-repeated-ui-exceptions.md) — in_progress
 
 ## Decision Log
 

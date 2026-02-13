@@ -244,4 +244,49 @@ public sealed class SnapshotRepositoryTests : IDisposable
         Assert.Equal("ASUSTeK", loaded.Summary.Platform.MotherboardVendor);
         Assert.Equal("AMD Ryzen 9 7950X", loaded.Summary.Platform.Cpu);
     }
+
+    [Fact]
+    public async Task GetAllBySessionId_ReturnsAllSnapshotsInOrder()
+    {
+        var sessionId = await CreateSessionAsync();
+
+        var snap1 = MakeSnapshot(sessionId, 1);
+        await _sut.CreateAsync(snap1);
+
+        await Task.Delay(10);
+        var snap2 = MakeSnapshot(sessionId, 3);
+        await _sut.CreateAsync(snap2);
+
+        var all = await _sut.GetAllBySessionIdAsync(sessionId);
+
+        Assert.Equal(2, all.Count);
+        // Ordered by created_at ASC
+        Assert.Equal(snap1.Id, all[0].Id);
+        Assert.Equal(snap2.Id, all[1].Id);
+    }
+
+    [Fact]
+    public async Task GetAllBySessionId_NoSnapshots_ReturnsEmpty()
+    {
+        var sessionId = await CreateSessionAsync();
+
+        var all = await _sut.GetAllBySessionIdAsync(sessionId);
+
+        Assert.Empty(all);
+    }
+
+    [Fact]
+    public async Task GetAllBySessionId_DoesNotReturnOtherSessions()
+    {
+        var sessionId1 = await CreateSessionAsync();
+        var sessionId2 = await CreateSessionAsync();
+
+        await _sut.CreateAsync(MakeSnapshot(sessionId1, 1));
+        await _sut.CreateAsync(MakeSnapshot(sessionId2, 2));
+
+        var all = await _sut.GetAllBySessionIdAsync(sessionId1);
+
+        Assert.Single(all);
+        Assert.Equal(sessionId1, all[0].SessionId);
+    }
 }

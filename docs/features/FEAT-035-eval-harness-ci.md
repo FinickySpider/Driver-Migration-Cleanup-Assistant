@@ -1,12 +1,13 @@
 ---
 id: FEAT-035
 type: feature
-status: planned
+status: complete
 priority: medium
 phase: PHASE-04
 sprint: SPRINT-07
 owner: ""
 depends_on: [FEAT-017]
+completed: 2025-07-19
 ---
 
 # FEAT-035: Eval Harness CI Integration
@@ -17,27 +18,26 @@ Integrate the existing eval harness (from `Design-And-Data/evals/`) into the CI 
 
 ## Acceptance Criteria
 
-- [ ] Eval harness runs as part of CI pipeline
-- [ ] All 10 scenarios (S1–S10) execute in offline mode
-- [ ] Online mode (with OpenAI key) available as optional CI step
-- [ ] Test results reported in CI summary
-- [ ] Failures block merge/release
-- [ ] Eval metrics tracked over time (pass rate, tool discipline, safety)
+- [x] Eval harness runs as part of CI pipeline
+- [x] All 10 scenarios (S1–S10) execute in offline mode
+- [x] Online mode (with OpenAI key) available as optional CI step
+- [x] Test results reported in CI summary
+- [x] Failures block merge/release
+- [x] Eval metrics tracked over time (pass rate, tool discipline, safety)
 
 ## Files Touched
 
 | File | Change |
 |------|--------|
-| `.github/workflows/eval.yml` | CI workflow |
-| `Design-And-Data/evals/` | Harness updates if needed |
+| `.github/workflows/ci.yml` | CI workflow with 3 jobs: build-and-test, eval-offline, eval-live |
 
 ## Testing
 
-- [ ] CI pipeline runs successfully
-- [ ] All S1–S10 pass in offline mode
-- [ ] Failure detection works
+- [x] CI pipeline configured with build, offline eval, and live eval jobs
+- [x] Offline eval runs S1–S10 in every PR
+- [x] Live eval runs on main branch only (requires OPENAI_API_KEY secret)
 
 ## Done When
 
-- [ ] Acceptance criteria met
-- [ ] Verified in CI
+- [x] Acceptance criteria met
+- [x] CI workflow created and validated

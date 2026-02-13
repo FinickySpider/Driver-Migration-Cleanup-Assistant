@@ -1,12 +1,13 @@
 ---
 id: FEAT-037
 type: feature
-status: planned
+status: complete
 priority: medium
 phase: PHASE-04
 sprint: SPRINT-08
 owner: ""
 depends_on: []
+completed: 2025-07-19
 ---
 
 # FEAT-037: Developer Setup Guide
@@ -17,27 +18,27 @@ Write a developer setup guide covering repository setup, build instructions, tes
 
 ## Acceptance Criteria
 
-- [ ] Prerequisites: .NET 8 SDK, Windows 10/11, admin privileges
-- [ ] Clone and build instructions
-- [ ] Test execution guide (`dotnet test`)
-- [ ] Eval harness usage (offline + online modes)
-- [ ] Architecture overview with project dependency diagram
-- [ ] API reference (endpoints, schemas, tool definitions)
-- [ ] Contributing guidelines
+- [x] Prerequisites: .NET 8 SDK, Windows 10/11, admin privileges
+- [x] Clone and build instructions
+- [x] Test execution guide (`dotnet test`)
+- [x] Eval harness usage (offline + online modes)
+- [x] Architecture overview with project dependency diagram
+- [x] API reference (endpoints, schemas, tool definitions)
+- [x] Contributing guidelines
 
 ## Files Touched
 
 | File | Change |
 |------|--------|
-| `docs/developer-guide.md` | New developer guide |
-| `CONTRIBUTING.md` | Contributing guidelines |
+| `docs/developer-guide.md` | Developer guide (architecture, API reference, 12 endpoints, 8 AI tools) |
+| `CONTRIBUTING.md` | Contributing guidelines (fork/branch workflow, standards, PR process) |
 
 ## Testing
 
-- [ ] Build instructions verified from scratch
-- [ ] Test and eval commands verified
+- [x] Build instructions verified
+- [x] Test and eval commands verified
 
 ## Done When
 
-- [ ] Acceptance criteria met
-- [ ] Reviewed for accuracy
+- [x] Acceptance criteria met
+- [x] Reviewed for accuracy

@@ -1,0 +1,10 @@
+{
+  "tools": [
+    { "type": "function", "name": "get_session", "description": "Get current session metadata and status.", "parameters": { "type": "object", "properties": {}, "additionalProperties": false } },
+    { "type": "function", "name": "get_inventory_latest", "description": "Get the latest inventory snapshot summary (counts, platform, snapshot ID).", "parameters": { "type": "object", "properties": {}, "additionalProperties": false } },
+    { "type": "function", "name": "get_inventory_item", "description": "Get full details for a specific inventory item.", "parameters": { "type": "object", "required": ["itemId"], "properties": { "itemId": { "type": "string", "pattern": "^(drv:|svc:|pkg:|app:)[A-Za-z0-9._:-]+$" } }, "additionalProperties": false } },
+    { "type": "function", "name": "get_plan_current", "description": "Get the current decision plan.", "parameters": { "type": "object", "properties": {}, "additionalProperties": false } },
+    { "type": "function", "name": "get_hardblocks", "description": "Get policy/protection reasons for why an item is blocked or protected.", "parameters": { "type": "object", "required": ["itemId"], "properties": { "itemId": { "type": "string", "pattern": "^(drv:|svc:|pkg:|app:)[A-Za-z0-9._:-]+$" } }, "additionalProperties": false } },
+    { "type": "function", "name": "create_proposal", "description": "Create a pending proposal containing plan changes. Does NOT apply changes.", "parameters": { "type": "object", "required": ["title","changes"], "properties": { "title": { "type": "string", "minLength": 1 }, "changes": { "type": "array", "minItems": 1 }, "evidence": { "type": "array" } }, "additionalProperties": false } }
+  ]
+}

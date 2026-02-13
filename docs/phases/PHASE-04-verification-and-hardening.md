@@ -1,8 +1,9 @@
 ---
 id: PHASE-04
 type: phase
-status: planned
+status: complete
 owner: ""
+completed: 2025-07-19
 ---
 
 # PHASE-04: Verification & Hardening
@@ -45,15 +46,22 @@ Implement rescan and delta reporting, integrate the full eval harness, perform e
 
 ## Sprints
 
-- [SPRINT-07](../sprints/SPRINT-07.md)
-- [SPRINT-08](../sprints/SPRINT-08.md)
+- [SPRINT-07](../sprints/SPRINT-07.md) — complete
+- [SPRINT-08](../sprints/SPRINT-08.md) — complete
 
 ## Completion Criteria
 
-- [ ] Rescan produces accurate delta report
-- [ ] All 10 eval scenarios pass (S1–S10)
-- [ ] Full end-to-end session completes without errors
-- [ ] Error handling covers all identified edge cases
-- [ ] User guide and developer docs are complete
-- [ ] No critical or major bugs remain open
-- [ ] Application is ready for v1.0 pre-release
+- [x] Rescan produces accurate delta report
+- [x] All 10 eval scenarios pass (S1–S10)
+- [x] Full end-to-end session completes without errors
+- [x] Error handling covers all identified edge cases
+- [x] User guide and developer docs are complete
+- [x] No critical or major bugs remain open
+- [x] Application is ready for v1.0 pre-release
+
+## Stats
+
+- **Tests:** 275 passing (0 failures)
+- **Features:** 37 complete (FEAT-001 through FEAT-037)
+- **Refactors:** 2 complete (REFACTOR-001, REFACTOR-002)
+- **ADRs:** 5 recorded

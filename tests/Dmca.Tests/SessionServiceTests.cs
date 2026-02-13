@@ -81,7 +81,7 @@ public sealed class SessionServiceTests : IDisposable
     {
         var session = await _sut.CreateSessionAsync();
 
-        await Assert.ThrowsAsync<InvalidOperationException>(
+        await Assert.ThrowsAsync<Core.SessionStateException>(
             () => _sut.TransitionAsync(session.Id, SessionStatus.COMPLETED));
     }
 

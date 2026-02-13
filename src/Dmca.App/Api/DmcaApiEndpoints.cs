@@ -31,7 +31,8 @@ public static class DmcaApiEndpoints
         ISnapshotRepository snapshotRepo,
         PlanService planService,
         ProposalService proposalService,
-        PlanMergeService mergeService)
+        PlanMergeService mergeService,
+        RescanService? rescanService = null)
     {
         // ── Session ──
         app.MapGet("/v1/session", async () =>
@@ -198,6 +199,32 @@ public static class DmcaApiEndpoints
             {
                 await proposalService.RejectAsync(id);
                 return Results.Ok(new { message = "Proposal rejected." });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Results.BadRequest(new { error = ex.Message });
+            }
+        });
+
+        // ── Rescan ──
+        app.MapPost("/v1/rescan", async () =>
+        {
+            if (rescanService is null)
+                return Results.StatusCode(501);
+
+            var session = await sessionService.GetCurrentSessionAsync();
+            if (session is null)
+                return Results.NotFound(new { error = "No active session." });
+
+            try
+            {
+                var snapshot = await rescanService.RescanAsync(session.Id);
+                return Results.Json(new
+                {
+                    message = "Rescan complete. Session completed.",
+                    snapshotId = snapshot.Id,
+                    summary = snapshot.Summary,
+                }, JsonOpts);
             }
             catch (InvalidOperationException ex)
             {

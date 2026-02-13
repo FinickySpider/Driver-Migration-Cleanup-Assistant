@@ -127,6 +127,29 @@ public sealed class SnapshotRepository : ISnapshotRepository
         return rows.Select(r => r.ToInventoryItem()).ToList().AsReadOnly();
     }
 
+    public async Task<IReadOnlyList<InventorySnapshot>> GetAllBySessionIdAsync(Guid sessionId)
+    {
+        const string sql = """
+            SELECT * FROM snapshots
+            WHERE session_id = @SessionId
+            ORDER BY created_at ASC
+            """;
+
+        using var conn = _db.CreateConnection();
+        var rows = await conn.QueryAsync<SnapshotRow>(sql,
+            new { SessionId = sessionId.ToString() });
+
+        var snapshots = new List<InventorySnapshot>();
+        foreach (var row in rows)
+        {
+            var snapshotId = Guid.Parse(row.id);
+            var items = await GetItemsBySnapshotIdAsync(snapshotId);
+            snapshots.Add(row.ToSnapshot(items));
+        }
+
+        return snapshots.AsReadOnly();
+    }
+
     // ── Row types for Dapper mapping ──
 
     private sealed class SnapshotRow

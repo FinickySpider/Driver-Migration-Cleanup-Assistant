@@ -1,0 +1,106 @@
+name: DMCA CI — Build, Test & Eval
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  checks: write
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+jobs:
+  build-and-test:
+    name: Build & Unit Tests
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore
+        run: dotnet restore Dmca.slnx
+
+      - name: Build
+        run: dotnet build Dmca.slnx --no-restore --configuration Release
+
+      - name: Test
+        run: dotnet test Dmca.slnx --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=test-results.trx"
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: '**/test-results.trx'
+
+  eval-offline:
+    name: Eval Harness — Offline (S1–S10)
+    runs-on: windows-latest
+    needs: build-and-test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore eval project
+        run: dotnet restore Design-And-Data/evals/dmca-evals/dmca-evals.sln
+
+      - name: Build eval project
+        run: dotnet build Design-And-Data/evals/dmca-evals/dmca-evals.sln --no-restore --configuration Release
+
+      - name: Run offline evals (S1–S10)
+        run: dotnet test Design-And-Data/evals/dmca-evals/dmca-evals.sln --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=eval-results.trx" --filter "Category!=Live"
+
+      - name: Upload eval results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-results
+          path: '**/eval-results.trx'
+
+  eval-live:
+    name: Eval Harness — Live (OpenAI)
+    runs-on: windows-latest
+    needs: eval-offline
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    environment: openai-eval
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore eval project
+        run: dotnet restore Design-And-Data/evals/dmca-evals/dmca-evals.sln
+
+      - name: Build eval project
+        run: dotnet build Design-And-Data/evals/dmca-evals/dmca-evals.sln --no-restore --configuration Release
+
+      - name: Run live evals
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: dotnet test Design-And-Data/evals/dmca-evals/dmca-evals.sln --no-build --configuration Release --verbosity normal --logger "trx;LogFileName=eval-live-results.trx" --filter "Category=Live"
+
+      - name: Upload live eval results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eval-live-results
+          path: '**/eval-live-results.trx'

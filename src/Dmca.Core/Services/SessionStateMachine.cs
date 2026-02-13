@@ -34,8 +34,7 @@ public static class SessionStateMachine
     {
         if (!CanTransition(from, to))
         {
-            throw new InvalidOperationException(
-                $"Invalid session status transition: {from} → {to}");
+            throw new SessionStateException(from.ToString(), to.ToString());
         }
     }
 }

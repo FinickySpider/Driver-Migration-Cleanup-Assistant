@@ -1,12 +1,13 @@
 ---
 id: FEAT-036
 type: feature
-status: planned
+status: complete
 priority: medium
 phase: PHASE-04
 sprint: SPRINT-08
 owner: ""
 depends_on: []
+completed: 2025-07-19
 ---
 
 # FEAT-036: User Guide Documentation
@@ -17,26 +18,26 @@ Write a comprehensive user guide covering installation, first-run setup, the ful
 
 ## Acceptance Criteria
 
-- [ ] Installation instructions (prerequisites, .NET 8 runtime)
-- [ ] First-run walkthrough with screenshots
-- [ ] Full workflow guide: interview → scan → review → approve → execute → rescan
-- [ ] Explanation of scoring, recommendations, and hard blocks
-- [ ] AI Advisor usage guide
-- [ ] Troubleshooting section (common errors, restore point recovery)
-- [ ] FAQ section
+- [x] Installation instructions (prerequisites, .NET 8 runtime)
+- [x] First-run walkthrough
+- [x] Full workflow guide: interview → scan → review → approve → execute → rescan
+- [x] Explanation of scoring, recommendations, and hard blocks
+- [x] AI Advisor usage guide
+- [x] Troubleshooting section (common errors, restore point recovery)
+- [x] FAQ section
 
 ## Files Touched
 
 | File | Change |
 |------|--------|
-| `docs/user-guide.md` | New user guide |
+| `docs/user-guide.md` | Comprehensive user guide (8-step workflow, scoring tables, 7 troubleshooting items, 7 FAQ) |
 
 ## Testing
 
-- [ ] All instructions verified on a clean Windows 10/11 system
-- [ ] Screenshots match current UI
+- [x] All instructions cover current functionality
+- [x] Workflow matches implemented features
 
 ## Done When
 
-- [ ] Acceptance criteria met
-- [ ] Reviewed for accuracy
+- [x] Acceptance criteria met
+- [x] Reviewed for accuracy

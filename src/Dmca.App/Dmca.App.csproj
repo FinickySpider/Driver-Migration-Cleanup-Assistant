@@ -4,6 +4,13 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>..\..\assets\icons\Wrench_Black.ico</ApplicationIcon>
+    <AssemblyTitle>Driver Migration Cleanup Assistant</AssemblyTitle>
+    <Product>DMCA</Product>
+    <Company>FinickySpider</Company>
+    <Copyright>Copyright © 2026</Copyright>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +23,8 @@
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.1" />
     <PackageReference Include="System.Management" Version="8.0.0" />
     <PackageReference Include="System.ServiceProcess.ServiceController" Version="8.0.1" />
   </ItemGroup>
@@ -23,6 +32,21 @@
   <ItemGroup>
     <ProjectReference Include="..\Dmca.Core\Dmca.Core.csproj" />
     <ProjectReference Include="..\Dmca.Data\Dmca.Data.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="..\..\Design-And-Data\rules\rules.yml">
+      <Link>rules.yml</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="..\..\Design-And-Data\ai\openai_tools.json">
+      <Link>openai_tools.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="..\..\Design-And-Data\ai\ai_tool_policy_prompt.txt">
+      <Link>ai_tool_policy_prompt.txt</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

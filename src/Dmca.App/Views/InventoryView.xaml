@@ -13,6 +13,13 @@
         <StackPanel DockPanel.Dock="Top" Margin="0,0,0,16">
             <TextBlock Text="Inventory" Style="{StaticResource SectionHeading}" />
 
+            <!-- Scan Button -->
+            <Button Content="🔍 Scan Now"
+                    Command="{Binding ScanCommand}"
+                    Style="{StaticResource PrimaryButton}"
+                    Margin="0,0,0,12"
+                    HorizontalAlignment="Left" />
+
             <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
                 <TextBox Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
                          Width="300" Padding="8" FontSize="14"
@@ -24,10 +31,13 @@
                     </TextBox.Style>
                 </TextBox>
 
-                <ComboBox SelectedItem="{Binding FilterType}" Width="150" Margin="8,0,0,0"
+                <ComboBox SelectedValue="{Binding FilterType}"
+                          SelectedValuePath="Type"
+                          DisplayMemberPath="Label"
+                          Width="150" Margin="8,0,0,0"
                           Padding="8,6" FontSize="13">
                     <ComboBox.Items>
-                        <x:Null />
+                        <vm:InventoryTypeOption Label="All" Type="{x:Null}" />
                         <vm:InventoryTypeOption Label="Drivers" Type="DRIVER" />
                         <vm:InventoryTypeOption Label="Services" Type="SERVICE" />
                         <vm:InventoryTypeOption Label="Packages" Type="DRIVER_PACKAGE" />

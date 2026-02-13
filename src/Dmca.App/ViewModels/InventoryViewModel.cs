@@ -14,6 +14,7 @@ public sealed partial class InventoryViewModel : PageViewModel
 {
     private readonly ScanService _scanService;
     private readonly ISnapshotRepository _snapshotRepo;
+    private readonly SessionService _sessionService;
 
     public override string Title => "Inventory";
 
@@ -35,22 +36,26 @@ public sealed partial class InventoryViewModel : PageViewModel
     public ObservableCollection<InventoryItem> Items { get; } = [];
     public ObservableCollection<InventoryItem> FilteredItems { get; } = [];
 
-    public InventoryViewModel(ScanService scanService, ISnapshotRepository snapshotRepo)
+    public InventoryViewModel(ScanService scanService, ISnapshotRepository snapshotRepo, SessionService sessionService)
     {
         _scanService = scanService;
         _snapshotRepo = snapshotRepo;
+        _sessionService = sessionService;
     }
 
     partial void OnFilterTextChanged(string value) => ApplyFilter();
     partial void OnFilterTypeChanged(InventoryItemType? value) => ApplyFilter();
 
     [RelayCommand]
-    private async Task ScanAsync(Guid sessionId)
+    private async Task ScanAsync()
     {
+        var session = await _sessionService.GetCurrentSessionAsync();
+        if (session is null) return;
+
         IsScanning = true;
         try
         {
-            Snapshot = await _scanService.ScanAsync(sessionId);
+            Snapshot = await _scanService.ScanAsync(session.Id);
             LoadItems(Snapshot);
         }
         finally

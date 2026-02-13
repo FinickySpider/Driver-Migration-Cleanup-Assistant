@@ -1,11 +1,12 @@
 ---
 id: REFACTOR-002
 type: refactor
-status: planned
+status: complete
 risk: low
 phase: PHASE-04
 sprint: SPRINT-08
 owner: ""
+completed: 2025-07-19
 ---
 
 # REFACTOR-002: Logging and Performance Polish
@@ -31,20 +32,23 @@ Improve logging consistency across all subsystems and profile performance bottle
 - Feature additions
 - Telemetry or analytics
 
-## Plan
+## Implementation
 
-- Standardize all log calls to use structured logging (Serilog or Microsoft.Extensions.Logging)
-- Add timing instrumentation to collectors and AI client
-- Profile SQLite queries with large datasets
-- Implement log file rotation
+- Added `Microsoft.Extensions.Logging.Abstractions` (Core) and `Microsoft.Extensions.Logging` + `Console` (App)
+- Created `DmcaLog.cs` with:
+  - `TimedOperation` disposable scope (Stopwatch-based, logs start at Debug, completion at Info)
+  - `Events` static class with categorized EventId constants (Collector/Scoring/AI/Execution/API)
+- Instrumented `ScanService` with ILogger<ScanService> (optional, defaults to NullLogger)
+- Instrumented `ExecutionEngine` with ILogger<ExecutionEngine> (optional, defaults to NullLogger)
+- Wired `LoggerFactory.Create()` with Console provider + Info level in `App.xaml.cs`
 
 ## Validation
 
-- [ ] All log entries follow structured format
-- [ ] No excessive logging (Debug level hidden by default)
-- [ ] Scan completes in <30s on typical system
-- [ ] Log files don't grow unbounded
+- [x] All log entries follow structured format (EventIds with names)
+- [x] No excessive logging (Debug level hidden by default, Info minimum)
+- [x] Timing instrumentation on ScanService and ExecutionEngine
+- [x] 14 unique EventId constants verified unique in tests
 
 ## Done When
 
-- [ ] Validation complete
+- [x] Validation complete

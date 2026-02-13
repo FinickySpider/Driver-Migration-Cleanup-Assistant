@@ -11,5 +11,6 @@ public interface ISnapshotRepository
     Task CreateAsync(InventorySnapshot snapshot);
     Task<InventorySnapshot?> GetByIdAsync(Guid id);
     Task<InventorySnapshot?> GetLatestBySessionIdAsync(Guid sessionId);
+    Task<IReadOnlyList<InventorySnapshot>> GetAllBySessionIdAsync(Guid sessionId);
     Task<IReadOnlyList<InventoryItem>> GetItemsBySnapshotIdAsync(Guid snapshotId);
 }

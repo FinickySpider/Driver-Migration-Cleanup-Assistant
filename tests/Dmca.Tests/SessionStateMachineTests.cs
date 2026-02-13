@@ -39,7 +39,7 @@ public sealed class SessionStateMachineTests
     [Fact]
     public void ValidateTransition_InvalidPair_Throws()
     {
-        var ex = Assert.Throws<InvalidOperationException>(
+        var ex = Assert.Throws<Core.SessionStateException>(
             () => SessionStateMachine.ValidateTransition(SessionStatus.NEW, SessionStatus.COMPLETED));
 
         Assert.Contains("Invalid session status transition", ex.Message);

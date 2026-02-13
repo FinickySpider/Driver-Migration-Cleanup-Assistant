@@ -1,6 +1,8 @@
 using Dmca.Core.Execution.Actions;
 using Dmca.Core.Interfaces;
 using Dmca.Core.Models;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Dmca.Core.Execution;
 
@@ -16,15 +18,18 @@ public sealed class ExecutionEngine
     private readonly IActionQueueRepository _queueRepo;
     private readonly AuditLogger _auditLogger;
     private readonly Dictionary<ActionType, IActionHandler> _handlers;
+    private readonly ILogger<ExecutionEngine> _logger;
 
     public ExecutionEngine(
         IActionQueueRepository queueRepo,
         AuditLogger auditLogger,
-        IEnumerable<IActionHandler> handlers)
+        IEnumerable<IActionHandler> handlers,
+        ILogger<ExecutionEngine>? logger = null)
     {
         _queueRepo = queueRepo;
         _auditLogger = auditLogger;
         _handlers = handlers.ToDictionary(h => h.HandledType);
+        _logger = logger ?? NullLogger<ExecutionEngine>.Instance;
     }
 
     /// <summary>
@@ -45,11 +50,17 @@ public sealed class ExecutionEngine
     /// <returns>The final queue state.</returns>
     public async Task<ActionQueue> ExecuteAsync(Guid queueId, CancellationToken cancellationToken = default)
     {
+        using var _ = DmcaLog.BeginTimedOperation(_logger, "ExecutionEngine.ExecuteAsync");
+
         var queue = await _queueRepo.GetByIdAsync(queueId)
             ?? throw new InvalidOperationException($"Action queue {queueId} not found.");
 
         if (queue.OverallStatus != ActionStatus.PENDING)
             throw new InvalidOperationException($"Queue {queueId} is not in PENDING status (current: {queue.OverallStatus}).");
+
+        _logger.LogInformation(DmcaLog.Events.ExecutionStarted,
+            "Starting execution of queue {QueueId} with {ActionCount} actions in {Mode} mode",
+            queueId, queue.Actions.Count, queue.Mode);
 
         await _queueRepo.UpdateQueueStatusAsync(queueId, ActionStatus.RUNNING);
         queue.OverallStatus = ActionStatus.RUNNING;
@@ -146,6 +157,9 @@ public sealed class ExecutionEngine
 
         await _queueRepo.UpdateQueueStatusAsync(queueId, finalStatus);
         queue.OverallStatus = finalStatus;
+
+        _logger.LogInformation(DmcaLog.Events.ExecutionCompleted,
+            "Execution of queue {QueueId} completed with status {Status}", queueId, finalStatus);
 
         return queue;
     }
